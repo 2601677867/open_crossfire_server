@@ -60,9 +60,16 @@ namespace Commons.Native
         public static void strncpy(ref byte[] bytes, string source, int length)
         {
             bytes = new byte[length];
-            if (string.IsNullOrEmpty(source)) return;
-            
-            Global.Encoding.GetBytes(source, 0, source.Length >= length ? length - 1 : source.Length, bytes, 0);
+            if (string.IsNullOrEmpty(source) || length < 2) return;
+
+            // The old char-count clamp overflowed the field: GB2312 names need 2 bytes per char.
+            // flush:false makes the encoder leave a half-written double-byte char out.
+            var aChars = source.ToCharArray(0, Math.Min(source.Length, length - 1));
+            var aEncoded = new byte[length - 1];
+            Global.Encoding.GetEncoder().Convert(aChars, 0, aChars.Length, aEncoded, 0, aEncoded.Length,
+                false, out _, out var nBytesUsed, out _);
+
+            Array.Copy(aEncoded, 0, bytes, 0, nBytesUsed);
         }
 
         public static unsafe void strncpy(byte* ptr, ref string source, int length)

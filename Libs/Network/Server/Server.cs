@@ -70,12 +70,6 @@ namespace Network.Server
             m_maxNumberAcceptedClients = new Semaphore(numConnections, numConnections);
 
             m_sServerShortName = serverShortName;
-            
-            if (!CPublicLogger.GetLogger().GetFormatter().Exists("DELAY_PACKET"))
-            {
-                CPublicLogger.GetLogger().GetFormatter().AddFormatter("DELAY_PACKET", "{0}\t{1}\t{2}\t{3}",
-                    LOGLEVEL.LEVEL_FATAL, false, ConsoleColor.DarkYellow, false, "{0}/{1}/{2}/1_DELAY_PACKET_{5}.log");
-            }
         }
 
         #region 定义属性
@@ -271,29 +265,28 @@ namespace Network.Server
                     ClientList.Add(userToken);
                 }
 
+                var nLocalPort = ((IPEndPoint) e.AcceptSocket.LocalEndPoint).Port;
                 if (AcceptEvent != null)
                 {
                     AcceptEvent(userToken);
                 }
                 else
                 {
-                    CPublicLogger.GetLogger().info($"Accepted ({userToken.IPAddress}, {userToken.RemotePort})");
+                    CPublicLogger.GetLogger().info(
+                        $"Accepted ({userToken.IPAddress}, {userToken.RemotePort}) -> local port {nLocalPort}");
                 }
 
-                Console.WriteLine($"[DIAG] Posting initial receive for client ({userToken.IPAddress}, {userToken.RemotePort})");
+                CPublicLogger.GetLogger().debug(
+                    "Posting initial receive for client ({0}, {1}) on local port {2}",
+                    userToken.IPAddress, userToken.RemotePort, nLocalPort);
                 if (!e.AcceptSocket.ReceiveAsync(readEventArgs))
                 {
-                    Console.WriteLine($"[DIAG] ReceiveAsync completed synchronously, calling ProcessReceive");
+                    CPublicLogger.GetLogger().debug("ReceiveAsync completed synchronously");
                     ProcessReceive(readEventArgs);
-                }
-                else
-                {
-                    Console.WriteLine($"[DIAG] ReceiveAsync posted successfully, waiting for data");
                 }
             }
             catch (Exception me)
             {
-                Console.WriteLine($"[DIAG] ProcessAccept exception: {me.Message}\r\n{me.StackTrace}");
                 CPublicLogger.GetLogger().error(me);
                 //PublicLogger.getLogger().trace(me);
             }
@@ -333,7 +326,9 @@ namespace Network.Server
                 //Console.WriteLine("Connected");
 
                 var token = (IUserTokenBase) e.UserToken;
-                Console.WriteLine($"[DIAG] ProcessReceive called - BytesTransferred: {e.BytesTransferred}, SocketError: {e.SocketError}, Client: ({token.IPAddress}, {token.RemotePort})");
+                CPublicLogger.GetLogger().trace(
+                    "ProcessReceive {0} bytes, SocketError {1}, client {2}:{3}",
+                    e.BytesTransferred, e.SocketError, token.IPAddress, token.RemotePort);
                 
                 if (e.BytesTransferred > 0 && e.SocketError == SocketError.Success)
                 {
@@ -343,8 +338,9 @@ namespace Network.Server
 
                     var data = new byte[e.BytesTransferred];
                     Array.Copy(e.Buffer, e.Offset, data, 0, e.BytesTransferred);
-                    var hexDump = BitConverter.ToString(data, 0, Math.Min(data.Length, 32)).Replace("-", " ");
-                    Console.WriteLine($"[DIAG] Received {data.Length} bytes from ({token.IPAddress}, {token.RemotePort}), first 32 bytes: {hexDump}");
+                    CPublicLogger.GetLogger().trace("[{2}:{3}] recv {0}B: {1}",
+                        data.Length, BitConverter.ToString(data, 0, Math.Min(data.Length, 32)),
+                        token.IPAddress, token.RemotePort);
                     
                     lock (token.Buffer)
                     {
@@ -369,15 +365,12 @@ namespace Network.Server
                         //        Size        Header         Data
                         var lenBytes = token.Buffer.GetRange(1, 2).ToArray();
                         int packageLen = BitConverter.ToUInt16(lenBytes, 0);
-                        Console.WriteLine($"[DIAG] Packet extraction: Buffer[0]=0x{token.Buffer[0]:X2}, Buffer[1]=0x{token.Buffer[1]:X2}, Buffer[2]=0x{token.Buffer[2]:X2}, packageLen={packageLen}, Buffer.Count={token.Buffer.Count}");
-                        
-                        // 检查数据包末尾是否有结束字节
-                        if (token.Buffer.Count >= 2)
-                        {
-                            var lastByte = token.Buffer[token.Buffer.Count - 1];
-                            var secondLastByte = token.Buffer[token.Buffer.Count - 2];
-                            Console.WriteLine($"[DIAG] Last 2 bytes: 0x{secondLastByte:X2} 0x{lastByte:X2}");
-                        }
+                        CPublicLogger.GetLogger().trace(
+                            "frame head 0x{0:X2} len={1}B tail 0x{2:X2} 0x{3:X2} buffered={4}B",
+                            token.Buffer[0], packageLen,
+                            token.Buffer.Count >= 2 ? token.Buffer[token.Buffer.Count - 2] : (byte)0,
+                            token.Buffer.Count >= 1 ? token.Buffer[token.Buffer.Count - 1] : (byte)0,
+                            token.Buffer.Count);
                         
                         // Wire framing (client protocol): F1 + Size(2) + C1 C2 C3 + Data + F2 = Size + 7.
                         // Note: the encrypted login packet has no trailing 0xF2, so the end byte
@@ -423,13 +416,14 @@ namespace Network.Server
                 }
                 else
                 {
-                    Console.WriteLine($"[DIAG] Client disconnected or error - BytesTransferred: {e.BytesTransferred}, SocketError: {e.SocketError}, Client: ({token.IPAddress}, {token.RemotePort})");
+                    CPublicLogger.GetLogger().debug(
+                        "Client disconnected - transferred {0}, SocketError {1}, client {2}:{3}",
+                        e.BytesTransferred, e.SocketError, token.IPAddress, token.RemotePort);
                     CloseClientSocket(e);
                 }
             }
             catch (Exception xe)
             {
-                Console.WriteLine($"[DIAG] ProcessReceive exception: {xe.Message}\r\n{xe.StackTrace}");
                 CPublicLogger.GetLogger().error(xe);
                 //PublicLogger.getLogger().trace(xe);
             }

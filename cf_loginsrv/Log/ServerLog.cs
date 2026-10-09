@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Diagnostics;
-using System.IO;
-using cf_loginsrv.Config;
 using cf_loginsrv.Socket;
 using Commons.Log;
 using Network.Packet;
@@ -14,27 +12,14 @@ namespace cf_loginsrv.Log
         
         private static CBaseLogHelper sm_pLogger;
 
-        public static void Init(string sName, string sDirName, string sFileName, string sLogBaseDir, int nLogLevel)
+        public static void Init(string sName, string sDirName, string sLogBaseDir, int nLogLevel)
         {
-            sm_pLogger = new CBaseLogHelper(sName, sDirName, sFileName, sLogBaseDir, nLogLevel);
-            
-            if (!Directory.Exists($"{sm_pLogger.GetBaseLogPath()}/crossfire/SvrState"))
-            {
-                Directory.CreateDirectory($"{sm_pLogger.GetBaseLogPath()}/crossfire/SvrState");
-            }
-            
-            sm_pLogger.GetFormatter().AddFormatter("CONTENTS_FAME", 
-                "{0} {1}", LOGLEVEL.LEVEL_FATAL, false, ConsoleColor.DarkYellow, false, "{0}/{1}/{2}/CONTENTS_FAME_{6}_{7}.log");
-            
-            sm_pLogger.GetFormatter().AddFormatter("SVRSTATE_TIMEINFO", 
-                "TIME_{0}_{1};\t{2};\t{3};\t{4};\t{5};\t{6};\t{7};\t{8};\t{9};\t{10};\t{11}", 
-                LOGLEVEL.LEVEL_FATAL, false, ConsoleColor.Green, false,
-                "{0}/crossfire/SvrState/Profile_TIME_{5}_" + LOG_SHORT_NAME + "_{6}.log");
-            
-            sm_pLogger.GetFormatter().AddFormatter("SVRSTATE_IOINFO", 
-                "IO_{0}_{1};\t{2};\t{3}", 
-                LOGLEVEL.LEVEL_FATAL, false, ConsoleColor.Green, false,
-                "{0}/crossfire/SvrState/Profile_IO_{5}_" + LOG_SHORT_NAME + "_{6}.log");
+            sm_pLogger = new CBaseLogHelper(sName, sDirName, sLogBaseDir, nLogLevel);
+
+            var pFormatter = sm_pLogger.GetFormatter();
+            pFormatter.AddChannel("CONTENTS_FAME", "SYSTEM", LOGLEVEL.LEVEL_INFO, ConsoleColor.DarkGreen);
+            pFormatter.AddChannel("SVRSTATE_TIMEINFO", "PROFILE", LOGLEVEL.LEVEL_ALL, ConsoleColor.DarkGray);
+            pFormatter.AddChannel("SVRSTATE_IOINFO", "PROFILE", LOGLEVEL.LEVEL_ALL, ConsoleColor.DarkGray);
         }
 
         public static CBaseLogHelper GetLogger()
@@ -45,7 +30,6 @@ namespace cf_loginsrv.Log
         public static void LogFameSystem(string context, params object[] args)
         {
             sm_pLogger.PrintToConsole(context, "CONTENTS_FAME", args);
-            sm_pLogger.print("CONTENTS_FAME", context, args, DateTime.Now.ToString("HH:mm:ss.fff"));
         }
         
         public static void PacketProfile(string szProtoName, CLGUserContext cContext,
@@ -62,22 +46,18 @@ namespace cf_loginsrv.Log
         public static void PrintPrimaryError(string context, params object[] args)
         {
             sm_pLogger.PrintToConsole(context, "1_ERROR", args);
-            sm_pLogger.print("1_ERROR", context, args, CServerConfig.GetServerRemoteAddr(), LOG_SHORT_NAME, 
-                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
         }
         
         public static void PrintSvrState(string name, string ip, int port, int handle, double recv_time, double process_time, byte First, byte Second, params object[] args)
         {
-            sm_pLogger.print("SVRSTATE_TIMEINFO", process_time.ToString("F6"), args, 
-                sm_pLogger.GetHostName(), LOG_SHORT_NAME, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"),
-                ip, port.ToString(), handle.ToString(), First.ToString(), name, Second.ToString(),
-                (recv_time + process_time).ToString("F6"), recv_time.ToString("F6"));
+            sm_pLogger.PrintToConsole("{0} {1}:{2} h={3} cls={4}/{5} recv={6:F6}s proc={7:F6}s total={8:F6}s",
+                "SVRSTATE_TIMEINFO", name, ip, port, handle, First, Second, recv_time, process_time,
+                recv_time + process_time);
         }
         
         public static void PrintSvrIoState(string context)
         {
-            sm_pLogger.print("SVRSTATE_IOINFO", context, new object[] {}, 
-                sm_pLogger.GetHostName(), LOG_SHORT_NAME, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            sm_pLogger.PrintToConsole(context, "SVRSTATE_IOINFO");
         }
     }
 }

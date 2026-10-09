@@ -1,18 +1,16 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\",
+  "WorkspaceRootPath": "D:\\Works\\reverse_cf\\open_crossfire_server\\cf_loginsrv\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2F0B75E-9118-456E-8BE2-12297C5123ED}|cf_loginsrv.csproj|d:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\mainserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2F0B75E-9118-456E-8BE2-12297C5123ED}|cf_loginsrv.csproj|D:\\Works\\reverse_cf\\open_crossfire_server\\cf_loginsrv\\mainserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2F0B75E-9118-456E-8BE2-12297C5123ED}|cf_loginsrv.csproj|solutionrelative:mainserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2F0B75E-9118-456E-8BE2-12297C5123ED}|cf_loginsrv.csproj|D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\util\\llsmgmtclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2F0B75E-9118-456E-8BE2-12297C5123ED}|cf_loginsrv.csproj|solutionrelative:util\\llsmgmtclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|cf_loginsrv||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2F0B75E-9118-456E-8BE2-12297C5123ED}|cf_loginsrv.csproj|D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\application.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2F0B75E-9118-456E-8BE2-12297C5123ED}|cf_loginsrv.csproj|solutionrelative:application.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2F0B75E-9118-456E-8BE2-12297C5123ED}|cf_loginsrv.csproj|d:\\works\\reverse_cf\\open_crossfire_server\\cf_loginsrv\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|a54ad834-9219-4aa6-b589-607af21c3e26"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,39 +25,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "LLSMgmtClient.cs",
-              "DocumentMoniker": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\Util\\LLSMgmtClient.cs",
-              "RelativeDocumentMoniker": "Util\\LLSMgmtClient.cs",
-              "ToolTip": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\Util\\LLSMgmtClient.cs",
-              "RelativeToolTip": "Util\\LLSMgmtClient.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-07T07:15:11.49Z"
+              "Title": "cf_loginsrv",
+              "DocumentMoniker": "D:\\Works\\reverse_cf\\open_crossfire_server\\cf_loginsrv\\cf_loginsrv.csproj",
+              "RelativeDocumentMoniker": "cf_loginsrv.csproj",
+              "ToolTip": "D:\\Works\\reverse_cf\\open_crossfire_server\\cf_loginsrv\\cf_loginsrv.csproj",
+              "RelativeToolTip": "cf_loginsrv.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-10-09T06:39:27.171Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MainServer.cs",
-              "DocumentMoniker": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\MainServer.cs",
+              "DocumentMoniker": "D:\\Works\\reverse_cf\\open_crossfire_server\\cf_loginsrv\\MainServer.cs",
               "RelativeDocumentMoniker": "MainServer.cs",
-              "ToolTip": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\MainServer.cs",
+              "ToolTip": "D:\\Works\\reverse_cf\\open_crossfire_server\\cf_loginsrv\\MainServer.cs",
               "RelativeToolTip": "MainServer.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAmwCsAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAOQAAAAAAAAAAAAowOYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-07T06:56:44.474Z",
+              "WhenOpened": "2026-10-09T05:33:46.795Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Application.cs",
-              "DocumentMoniker": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\Application.cs",
-              "RelativeDocumentMoniker": "Application.cs",
-              "ToolTip": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\cf_loginsrv\\Application.cs",
-              "RelativeToolTip": "Application.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-07T06:56:36.831Z"
             }
           ]
         }

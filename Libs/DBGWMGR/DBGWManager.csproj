@@ -49,13 +49,17 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMRelease_CN|AnyCPU' ">
     <OutputPath>bin\CMMRelease_CN\</OutputPath>
   </PropertyGroup>
+  <!-- Commons/Network are built with the Debug configuration only and no longer write to
+       bin\Debug_CN / obj\Debug_CN, so the sibling libraries are referenced as projects. -->
   <ItemGroup>
-    <Reference Include="Commons">
-      <HintPath>..\Commons\bin\Debug_CN\Commons.dll</HintPath>
-    </Reference>
-    <Reference Include="Network">
-      <HintPath>..\Network\obj\Debug_CN\Network.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Commons\Commons.csproj">
+      <Project>{523B25AD-BFD7-4A25-AC9A-DEE565510E3F}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Network\Network.csproj">
+      <Project>{1646521E-31F8-476B-8931-BE658A91E322}</Project>
+      <Name>Network</Name>
+    </ProjectReference>
     <Reference Include="Security">
       <HintPath>..\Security\bin\Debug_CN\Security.dll</HintPath>
     </Reference>

@@ -46,20 +46,32 @@ namespace cf_loginsrv.Config
         {
             try
             {
-                if (!File.Exists(m_szSrvInfoPath)) return false;
-                
-                for (var i = 1; i <= CProtectedKey.MAX_CLIENT_SECURE_CODE_COUNT; i++)
+                if (!File.Exists(m_szSrvInfoPath))
                 {
-                    var iKey = GetIniValueInt(m_szSecureCodePath, "Client", $"Key{i}", int.MaxValue, false);
-                    if (iKey == int.MaxValue) break;
-                    CProtectedKey.GetInstance().AddProtectedKey(iKey, CProtectedKey.ESecureCodeType.TYPE_CLIENT);
+                    // Console only: CServerLog is not initialized until InitConfig() succeeds.
+                    Console.WriteLine($"[CONFIG] NOT FOUND {m_szSrvInfoPath}");
+                    return false;
                 }
 
-                for (var i = 1; i <= CProtectedKey.MAX_SERVER_SECURE_CODE_COUNT; i++)
+                if (File.Exists(m_szSecureCodePath))
                 {
-                    var iKey = GetIniValueInt(m_szSecureCodePath, "Server", $"Key{i}", int.MaxValue, false);
-                    if (iKey == int.MaxValue) break;
-                    CProtectedKey.GetInstance().AddProtectedKey(iKey, CProtectedKey.ESecureCodeType.TYPE_SERVER);
+                    for (var i = 1; i <= CProtectedKey.MAX_CLIENT_SECURE_CODE_COUNT; i++)
+                    {
+                        var iKey = GetIniValueInt(m_szSecureCodePath, "Client", $"Key{i}", int.MaxValue, false);
+                        if (iKey == int.MaxValue) break;
+                        CProtectedKey.GetInstance().AddProtectedKey(iKey, CProtectedKey.ESecureCodeType.TYPE_CLIENT);
+                    }
+
+                    for (var i = 1; i <= CProtectedKey.MAX_SERVER_SECURE_CODE_COUNT; i++)
+                    {
+                        var iKey = GetIniValueInt(m_szSecureCodePath, "Server", $"Key{i}", int.MaxValue, false);
+                        if (iKey == int.MaxValue) break;
+                        CProtectedKey.GetInstance().AddProtectedKey(iKey, CProtectedKey.ESecureCodeType.TYPE_SERVER);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"[CONFIG] NOT FOUND {m_szSecureCodePath} - no protected keys registered.");
                 }
 
                 m_nLogLevel = GetIniValueInt(m_szSrvInfoPath, "LogInfo", "ServerLogLevel", 4);
@@ -76,7 +88,9 @@ namespace cf_loginsrv.Config
                     var szPrivateIPRule = GetIniValueString(m_szSrvInfoPath, "ServerInfo", "PrivateIPRule", "");
                     if (string.IsNullOrEmpty(szPrivateIPRule))
                     {
-                        Console.WriteLine("Empty szPrivateRule!!!!");
+                        Console.WriteLine(
+                            "[CONFIG] ServerServiceForceIP is 0.0.0.0 and PrivateIPRule is empty - " +
+                            "set one of them in ServerInfo.ini.");
                         return false;
                     }
 
@@ -101,7 +115,13 @@ namespace cf_loginsrv.Config
                         }
                     }
 
-                    if (string.IsNullOrEmpty(m_szRemoteAddr) || m_szRemoteAddr == "0.0.0.0") return false;
+                    if (string.IsNullOrEmpty(m_szRemoteAddr) || m_szRemoteAddr == "0.0.0.0")
+                    {
+                        Console.WriteLine(
+                            $"[CONFIG] No local adapter matches PrivateIPRule \"{szPrivateIPRule}\" - " +
+                            "set ServerServiceForceIP or PrivateIPRule in ServerInfo.ini.");
+                        return false;
+                    }
                 }
 
                 var szSplitAddr = m_szRemoteAddr.Split('.');

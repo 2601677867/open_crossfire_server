@@ -19,53 +19,15 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Built\Debug\Network\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>obj\Debug\</OutputPath>
+    <!-- USE_CFVIP_SYSTEM must stay defined: MM_PK, CHATTING_PK, BUYITEM, PROTO_SLOTINFO
+         and PROTO_GAME_USER_INFO declare their CFVIP fields behind it, and cf_loginsrv
+         reads those fields, so dropping it makes the login server fail to compile. -->
+    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\Built\Release\Network\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'BuddyDebug|AnyCPU' ">
-    <OutputPath>../../Built/Debug/Network/</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_CN|AnyCPU' ">
-    <OutputPath>../../Built/Release/Network/</OutputPath>
-    <DefineConstants>TRACE;USE_CFVIP_SYSTEM</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_CN|AnyCPU' ">
-    <OutputPath>../../Built/Debug/Network/</OutputPath>
-    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMDebug_CN|AnyCPU' ">
-    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <OutputPath>bin\CMMDebug_CN\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMRelease_CN|AnyCPU' ">
-    <DefineConstants>TRACE;USE_CFVIP_SYSTEM</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <OutputPath>bin\CMMRelease_CN\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Commons">
-      <HintPath>..\Commons\bin\Debug_CN\Commons.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -74,6 +36,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <!-- Built from source: keeps Network bound to the Commons.dll this tree compiles. -->
+  <ItemGroup>
+    <ProjectReference Include="..\Commons\Commons.csproj">
+      <Project>{523B25AD-BFD7-4A25-AC9A-DEE565510E3F}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assert\ProtocolAssert.cs" />

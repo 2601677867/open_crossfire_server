@@ -3,92 +3,47 @@ using static Network.Protocol.P_SZ;
 
 namespace Network.ProtocolStruct.Login
 {
-    // 9107-byte login-result body (Pack=1). Together with the 4-byte m_eResult
-    // prefix of PROTO_REQUEST_CONNECT_RESULT the packet is exactly 9111 bytes -
-    // the size and layout of the captured real login-result packet
-    // (see cf_gamesrv\Tests\ServerListParserTest.cs):
-    //   prefix 43 + server array 100*90=9000 + tail 64 = 9107 (+4 = 9111).
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    // 8084-byte login body - verified against the binaries (MSVC Pack = 4):
+    //   prefix 52 + 100 x PROTO_GAMESERVER(80) + trailer 32.
+    // Sequential + Pack = 4, never Explicit: m_szCallName (0) and m_aServers (52) are
+    // reference fields, and LayoutKind.Explicit throws TypeLoadException for an object
+    // field it considers misaligned, which kills the type instead of the layout.
+    // Two offsets here are Pack = 4 padding artifacts a Pack = 1 port silently drops:
+    // the hole after the 13-byte name (USN sits at 16, not 13) and the int at 48 that
+    // pushes the array to 52.
+    // C++ `long` is 4 bytes on Win32, so USN and the connect keys are int, not Int64.
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct PROTO_LOGIN_INFO
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = SF_MAX_CHARACTER_NAME_LENGTH)]
-        public byte[] m_szCallName;
+        public byte[] m_szCallName;           // 0, hole 13..15
 
-        public long m_lUSN;                 // 8 bytes @13 (capture: data+17)
-        public byte m_bySpecialUser;
-        public byte m_byClanMember;
-        public short m_nLevel;
-        public int m_nKill;
-        public int m_nDeath;
-        public double m_dKillDeath;
+        public int m_lUSN;                    // 16
+        public byte m_bySpecialUser;          // 20, semantics not verified
+        public byte m_byClanMember;           // 21
+        public short m_nLevel;                // 22
+        public int m_nKill;                   // 24
+        public int m_nDeath;                  // 28
+        public int m_nDummy32;                // 32, semantics not verified
+        public double m_dKillDeath;           // 36
 
-        public short m_nServerCount;        // ends prefix @43
-            
+        public short m_nServerCount;          // 44
+        public int m_nDummy48;                // 48, semantics not verified
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_GAMESERVER_COUNT)]
-        public PROTO_GAMESERVER[] m_aServers;
+        public PROTO_GAMESERVER[] m_aServers; // 52
 
-        // 64-byte tail, order verified against the capture:
-        // m_nBannedTime = 500 @tail+17, season=17 @36, nty=1 @37, byNew=1 @44,
-        // szRegisterDate = "20150710195938" @49..63.
-        public byte m_bySupervisor;
-        public int m_bClearedPoint;
-        public int m_nDummy;
-        public long m_lKey1;
-        public int m_nBannedTime;           // 500 in the capture
-        public byte m_byUseGlobalJoin;
-        public byte m_byWaveLevel;
-        public byte m_byUseAutoServerSelect;
-        public long m_lKey2;
-        public int m_iSSN;
-        public byte m_bySeason;             // latest 17
-        public byte m_byNewSeasonNty;        // 1
-        public int m_iAddr;
-        public short m_sInfinityAIEvent;
-        public byte byNew;                  // 1
-        public int m_dummy5;
-
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
-        public string szRegisterDate;
-    }
-
-    // Historical alias of the same capture-verified layout (m_byFlag name).
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct PROTO_LOGIN_INFO_
-    {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = SF_MAX_CHARACTER_NAME_LENGTH)]
-        public byte[] m_szCallName;
-
-        public long m_lUSN;
-        public byte m_byFlag; // 1
-        public byte m_byClanMember;
-        public short m_nLevel;
-        public int m_nKill;
-        public int m_nDeath;
-        public double m_dKillDeath;
-
-        public short m_nServerCount;
-            
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_GAMESERVER_COUNT)]
-        public PROTO_GAMESERVER[] m_aServers;
-
-        public byte m_bySupervisor;
-        public int m_bClearedPoint;
-        public int m_nDummy;
-        public long m_lKey1;
-        public int m_nBannedTime; // 500
-        public byte m_byUseGlobalJoin;
-        public byte m_byWaveLevel;
-        public byte m_byUseAutoServerSelect;
-        public long m_lKey2;
-        public int m_iSSN;
-        public byte m_bySeason; // latest 17
-        public byte m_byNewSeasonNty; // 1
-        public int m_iAddr;
-        public short m_sInfinityAIEvent;
-        public byte byNew; // 1
-        public int m_dummy5;
-
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
-        public string szRegisterDate;
+        // Trailer: only its 32-byte size is verified, the order inside it is not.
+        public byte m_bySupervisor;           // 8052
+        public int m_lKey1;                   // 8056
+        public int m_nBannedTime;             // 8060
+        public byte m_byUseGlobalJoin;        // 8064
+        public byte m_byWaveLevel;            // 8065
+        public byte m_byUseAutoServerSelect;  // 8066
+        public int m_lKey2;                   // 8068
+        public int m_iSSN;                    // 8072
+        public byte m_bySeason;               // 8076
+        public byte m_byNewSeasonNty;         // 8077
+        public int m_iAddr;                   // 8080
     }
 }

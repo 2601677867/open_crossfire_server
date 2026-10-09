@@ -50,44 +50,51 @@ namespace cf_loginsrv.Packet
         
         protected short CopyUpdateServerList(ref PROTO_GAMESERVER_UPDATE[] tServers)
         {
-            short iServerCount = 0;
+            short iRow = 0;
             
             lock (CMainServer.m_aGameServers)
             {
-                for (var i = 0; i < MAX_GAMESERVER_COUNT; i++)
+                // Rows are packed from row 0 in slot order, the same way the login-result
+                // array is filled (verified against the captured real packet: row k holds
+                // server id k+1). A row left at 0 would read as server 0, so the unused
+                // tail is explicitly marked offline with -1.
+                for (var i = 0; i < MAX_GAMESERVER_COUNT && iRow < tServers.Length; i++)
                 {
-                    if (CMainServer.m_aGameServers[i].m_nServerID != -1)
-                    {
-                        tServers[iServerCount].m_nServerID = CMainServer.m_aGameServers[i].m_nServerID;
-                        
-                        if (tServers[iServerCount].m_nServerID < 0 
-                            || tServers[iServerCount].m_nServerID > MAX_GAMESERVER_COUNT)
-                            tServers[iServerCount].m_nEvent = 0;
-                        else if (CMainServer.m_aGameServers[i].m_bEvent)
-                            tServers[iServerCount].m_nEvent = 1;
-                        else
-                            tServers[iServerCount].m_nEvent = 0;
+                    var tServer = CMainServer.m_aGameServers[i];
+                    if (tServer.m_nServerID == -1) continue;
 
-                        if (CMainServer.m_aGameServers[i].m_nServerConnectCount >= 0)
-                            if (CMainServer.m_aGameServers[i].m_bGameServerConnected)
-                                tServers[iServerCount].m_nServerConnectCount = CalculateServerConnectPercentage(
-                                    CMainServer.m_aGameServers[i].m_nServerConnectCount,
-                                    CMainServer.m_aGameServers[i].m_nServerLimitCount);
-                            else
-                                tServers[iServerCount].m_nServerConnectCount = -1;
-                        else if (CMainServer.m_aGameServers[i].m_bGameServerConnected)
-                            tServers[iServerCount].m_nServerConnectCount = 0;
-                        else
-                            tServers[iServerCount].m_nServerConnectCount = -1;
+                    var bOnline = tServer.m_bGameServerConnected && tServer.m_nServerConnectCount >= 0;
 
-                        iServerCount++;
-                    }
+                    tServers[iRow].m_nServerID = tServer.m_nServerID;
+                    tServers[iRow].m_nServerStatus = bOnline ? (short) 1 : (short) 0;
+                    // On this wire a count of 0 means "up but not joinable" and -1 means
+                    // offline, so a reachable server always reports at least one player.
+                    tServers[iRow].m_nServerConnectCount =
+                        bOnline ? System.Math.Max(tServer.m_nServerConnectCount, 1) : -1;
+                    tServers[iRow].m_nEvent = bOnline
+                        && (tServer.m_bEvent
+                            || (tServer.m_nServerLimitCount > 0
+                                && tServer.m_nServerConnectCount >= tServer.m_nServerLimitCount))
+                            ? 1
+                            : 0;
+
+                    iRow++;
+                }
+
+                for (; iRow < tServers.Length; iRow++)
+                {
+                    tServers[iRow].m_nServerID = -1;
+                    tServers[iRow].m_nServerStatus = 0;
+                    tServers[iRow].m_nServerConnectCount = -1;
+                    tServers[iRow].m_nEvent = 0;
                 }
             }
             
-            return iServerCount;
+            return iRow;
         }
 
+        // The list carries an occupancy percentage, not the raw head count
+        // (PROTO_GAMESERVER @68 limit, @72 connect%).
         private int CalculateServerConnectPercentage(int nConnectCount, int nLimitCount)
         {
             if (nConnectCount == 0) return 0;
@@ -119,11 +126,13 @@ namespace cf_loginsrv.Packet
             float fLowestPercentage = 100;
             byAutoSelectID = 0;
 
-            Console.WriteLine($"[DIAG] CopyServerList: m_aGameServers null={CMainServer.m_aGameServers == null}, len={CMainServer.m_aGameServers?.Length}");
+            CServerLog.GetLogger().debug(
+                $"CopyServerList: m_aGameServers null={CMainServer.m_aGameServers == null}, len={CMainServer.m_aGameServers?.Length}");
             if (CMainServer.m_aGameServers != null)
             {
                 for (var dbg = 0; dbg < System.Math.Min(5, CMainServer.m_aGameServers.Length); dbg++)
-                    Console.WriteLine($"[DIAG] m_aGameServers[{dbg}]: ServerID={CMainServer.m_aGameServers[dbg].m_nServerID}, Connected={CMainServer.m_aGameServers[dbg].m_bGameServerConnected}, Port={CMainServer.m_aGameServers[dbg].m_nServerPort}");
+                    CServerLog.GetLogger().debug(
+                        $"m_aGameServers[{dbg}]: ServerID={CMainServer.m_aGameServers[dbg].m_nServerID}, Connected={CMainServer.m_aGameServers[dbg].m_bGameServerConnected}, Port={CMainServer.m_aGameServers[dbg].m_nServerPort}");
             }
 
             lock (CMainServer.m_aGameServers)
@@ -140,11 +149,6 @@ namespace cf_loginsrv.Packet
                         tServers[iCurrentId].m_dServerHighKD = CMainServer.m_aGameServers[i].m_dServerHighKD;
                         tServers[iCurrentId].m_dServerLowKD = CMainServer.m_aGameServers[i].m_dServerLowKD;
                         tServers[iCurrentId].m_nEvent = CMainServer.m_aGameServers[i].m_bEvent ? 1 : 0;
-
-                        // The real server sends these literals on every entry
-                        // (verified against the captured login-result packet).
-                        tServers[iCurrentId].m_nDummy12008 = 12008;
-                        tServers[iCurrentId].m_nDummy28004 = 28004;
 
                         if (CMainServer.m_aGameServers[i].m_nServerConnectCount >= 0)
                             if (CMainServer.m_aGameServers[i].m_bGameServerConnected)

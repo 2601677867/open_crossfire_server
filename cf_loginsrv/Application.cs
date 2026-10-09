@@ -25,6 +25,13 @@ namespace cf_loginsrv
             svc.Start(args);
             while (true)
             {
+                if (Console.IsInputRedirected)
+                {
+                    // ReadKey throws on redirected input; EOF (null) means shut down.
+                    if (Console.ReadLine() == null) break;
+                    continue;
+                }
+
                 var chKey = Console.ReadKey();
                 
                 if (chKey.Key == ConsoleKey.Escape || chKey.Key == ConsoleKey.Q)

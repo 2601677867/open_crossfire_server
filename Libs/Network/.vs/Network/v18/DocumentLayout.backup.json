@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\Libs\\Network\\",
+  "WorkspaceRootPath": "D:\\Works\\reverse_cf\\open_crossfire_server\\Libs\\Network\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1646521E-31F8-476B-8931-BE658A91E322}|Network.csproj|d:\\download\\ipgra v2 crossfire 3.0 source code (2)\\libs\\network\\server\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1646521E-31F8-476B-8931-BE658A91E322}|Network.csproj|d:\\works\\reverse_cf\\open_crossfire_server\\libs\\network\\server\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1646521E-31F8-476B-8931-BE658A91E322}|Network.csproj|solutionrelative:server\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Server.cs",
-              "DocumentMoniker": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\Libs\\Network\\Server\\Server.cs",
+              "DocumentMoniker": "D:\\Works\\reverse_cf\\open_crossfire_server\\Libs\\Network\\Server\\Server.cs",
               "RelativeDocumentMoniker": "Server\\Server.cs",
-              "ToolTip": "D:\\download\\ipgra v2 crossfire 3.0 source code (2)\\Libs\\Network\\Server\\Server.cs",
+              "ToolTip": "D:\\Works\\reverse_cf\\open_crossfire_server\\Libs\\Network\\Server\\Server.cs",
               "RelativeToolTip": "Server\\Server.cs",
-              "ViewState": "AgIAAIQBAAAAAAAAAAAYwJEBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAH4BAAAAAAAAAAAYwJEBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-08T04:32:25.594Z",
               "EditorCaption": ""

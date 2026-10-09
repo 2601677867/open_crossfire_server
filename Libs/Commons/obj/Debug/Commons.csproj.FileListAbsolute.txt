@@ -1,0 +1,6 @@
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\obj\Debug\Commons\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\obj\Debug\Commons\Commons.pdb
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\obj\Debug\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\obj\Debug\Commons.pdb
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\obj\Debug\Commons.csproj.AssemblyReference.cache
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\obj\Debug\Commons.csproj.CoreCompileInputs.cache

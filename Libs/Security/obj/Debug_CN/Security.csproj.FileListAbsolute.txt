@@ -6,3 +6,11 @@ C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\bin\
 C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\obj\Debug_CN\Security.csproj.CopyComplete
 C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\obj\Debug_CN\Security.dll
 C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\obj\Debug_CN\Security.pdb
+D:\Works\reverse_cf\open_crossfire_server\Libs\Security\_buildtest_tmp\Security.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Security\_buildtest_tmp\Security.pdb
+D:\Works\reverse_cf\open_crossfire_server\Libs\Security\_buildtest_tmp\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Security\obj\Debug_CN\Security.csproj.AssemblyReference.cache
+D:\Works\reverse_cf\open_crossfire_server\Libs\Security\obj\Debug_CN\Security.csproj.CoreCompileInputs.cache
+D:\Works\reverse_cf\open_crossfire_server\Libs\Security\obj\Debug_CN\Security.csproj.Up2Date
+D:\Works\reverse_cf\open_crossfire_server\Libs\Security\obj\Debug_CN\Security.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Security\obj\Debug_CN\Security.pdb

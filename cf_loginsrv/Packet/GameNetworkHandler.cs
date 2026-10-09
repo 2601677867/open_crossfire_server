@@ -36,12 +36,9 @@ namespace cf_loginsrv.Packet
         private bool TryProcessDebugLogin(CLGUserContext cContext, PROTO_REQUEST_CONNECT tReqConnect)
         {
             // DEBUG ONLY: accept ANY account/password without touching GDBGW.
-            // The login packet has no dedicated username field, so the raw password
-            // value is used as the displayed name.
-            var szName = string.Empty;
-            if (tReqConnect.tConnectInfo.m_szPassword != null)
-                szName = NativeUtil.BArrToStr(tReqConnect.tConnectInfo.m_szPassword).Trim();
-            if (string.IsNullOrEmpty(szName)) szName = DEBUG_ADMIN_ID;
+            // m_szPassword arrives still KISA-SEED encrypted (the decrypt in OnRequestLogin is
+            // commented out), so decoding it here only produces garbage - use the fixed debug name.
+            var szName = DEBUG_ADMIN_ID;
 
             CServerLog.GetLogger().warn(
                 "DEBUG MODE: login bypass accepted for ANY account/password (name: '{0}', IP: {1})",
@@ -93,28 +90,46 @@ namespace cf_loginsrv.Packet
                 tConnectRet.tLoginInfo.m_iSSN,
                 cContext.IPAddress);
 
-            Console.WriteLine($"[DIAG] TryProcessDebugLogin: serverCount={tConnectRet.tLoginInfo.m_nServerCount}, structSize={System.Runtime.InteropServices.Marshal.SizeOf(typeof(PROTO_REQUEST_CONNECT_RESULT))}");
-            if (tConnectRet.tLoginInfo.m_nServerCount > 0)
+            for (var i = 0; i < tConnectRet.tLoginInfo.m_nServerCount; i++)
             {
-                var srv = tConnectRet.tLoginInfo.m_aServers[0];
-                var nameStr = srv.m_szServerName != null ? System.Text.Encoding.ASCII.GetString(srv.m_szServerName).TrimEnd('\0') : "(null)";
-                var nSrvIdx = srv.m_nServerID;
-                var bConnected = nSrvIdx >= 0 && nSrvIdx < CMainServer.m_aGameServers.Length
-                    && CMainServer.m_aGameServers[nSrvIdx].m_bGameServerConnected;
-                Console.WriteLine($"[DIAG] Server[0]: ID={srv.m_nServerID}, Name='{nameStr}', IP={srv.m_dwServerAddr}, Port={srv.m_nServerPort}, HighProp={srv.m_nServerHighProperty}, Prop={srv.m_nProperty}, Connected={bConnected}");
+                var srv = tConnectRet.tLoginInfo.m_aServers[i];
+                CServerLog.GetLogger().debug(
+                    $"Row[{i}]: ID={srv.m_nServerID}, HighProp={srv.m_nServerHighProperty}, LowProp={srv.m_nServerLowProperty}, " +
+                    $"LowLim={srv.m_nServerLowLimit}, HighLim={srv.m_nServerHighLimit}, Limit={srv.m_nServerLimitCount}, " +
+                    $"Count={srv.m_nServerConnectCount}, Event={srv.m_nEvent}, " +
+                    $"Port={srv.m_nServerPort}, IP={srv.m_dwServerAddr}, " +
+                    $"Name='{(srv.m_szServerName != null ? NativeUtil.BArrToStr(srv.m_szServerName) : "(null)")}'");
             }
 
             var cPacket = new CPacket();
             cPacket.SetFirstClass(PROTOCOL_LOGIN_FIRST_CLASS);
             cPacket.SetSecondClass(PROTOCOL_REQUEST_CONNECT_RESULT);
             var bCopyOk = cPacket.CopyToUserDataArea(tConnectRet);
-            Console.WriteLine($"[DIAG] CopyToUserDataArea: success={bCopyOk}, recordedSize={cPacket.GetRecordedSize()}, wSize={cPacket.GetReceivedSize()}");
+            CServerLog.GetLogger().debug(
+                $"CopyToUserDataArea: success={bCopyOk}, recordedSize={cPacket.GetRecordedSize()}, wSize={cPacket.GetReceivedSize()}");
             var bSendOk = CServer.SendMessage(cContext, cPacket);
-            Console.WriteLine($"[DIAG] SendMessage: success={bSendOk}");
+            CServerLog.GetLogger().debug($"SendMessage: success={bSendOk}");
+
+            // Byte-level proof of what the client actually receives: the wire frame is
+            // F1 + wSize(2) + c1 c2 c3 + payload + F2, and the payload is
+            // result(4) + prefix(52) + 100 x 80-byte server rows, so row 0 starts at
+            // wire offset 6 + 4 + 52 = 62.
+            var aWire = cPacket.GetPacketData();
+            if (aWire.Length >= 62 + 80)
+                CServerLog.GetLogger().info(
+                    "CONNECT_RESULT bytes frame={0}B prefix={1} row0={2}",
+                    aWire.Length, ToHex(aWire, 6, 56), ToHex(aWire, 62, 80));
 
             return true;
         }
 #endif
+
+        private static string ToHex(byte[] buff, int offset, int length)
+        {
+            var sb = new System.Text.StringBuilder(length * 2);
+            for (var i = offset; i < offset + length; i++) sb.Append(buff[i].ToString("x2"));
+            return sb.ToString();
+        }
 
         #region REQ_CONNECT
 
@@ -595,11 +610,8 @@ namespace cf_loginsrv.Packet
                                 (uint) tConnectRet.tLoginInfo.m_lKey1,
                                 (uint) (tConnectRet.tLoginInfo.m_lKey1 >> 31));
                             // MMCONNECT included first
-                            
-                            //tConnectRet.tLoginInfo.m_nRankMatchFlag = 12;
-                            
+                                                        
                             tConnectRet.tLoginInfo.m_iSSN = 318;
-                            tConnectRet.tLoginInfo.m_sInfinityAIEvent = 0;
                             tConnectRet.tLoginInfo.m_bySeason = 14;
                             tConnectRet.tLoginInfo.m_byNewSeasonNty = 1;
                             
@@ -701,11 +713,8 @@ namespace cf_loginsrv.Packet
                                 cContext.tStatInfo.lUSN,
                                 (uint) tConnectRet.tLoginInfo.m_lKey1,
                                 (uint) (tConnectRet.tLoginInfo.m_lKey1 >> 31));
-                            
-                            //tConnectRet.tLoginInfo.m_nRankMatchFlag = 12;
-                            
+                                                        
                             tConnectRet.tLoginInfo.m_iSSN = 318;
-                            tConnectRet.tLoginInfo.m_sInfinityAIEvent = 0;
                             tConnectRet.tLoginInfo.m_bySeason = 14;
                             tConnectRet.tLoginInfo.m_byNewSeasonNty = 1;
                             
@@ -973,13 +982,23 @@ namespace cf_loginsrv.Packet
             var tUpdateRet = new PROTO_REQUEST_UPDATE_RESULT();
             tUpdateRet.aServers = new PROTO_GAMESERVER_UPDATE[MAX_GAMESERVER_COUNT];
             
-            CopyUpdateServerList(ref tUpdateRet.aServers);
+            var nServerCount = CopyUpdateServerList(ref tUpdateRet.aServers);
                     
             cPacket.SetFirstClass(PROTOCOL_LOGIN_FIRST_CLASS);
             cPacket.SetSecondClass(PROTOCOL_REQUEST_UPDATE_RESULT);
             cPacket.CopyToUserDataArea(tUpdateRet);
             var bSent = CServer.SendMessage(cContext, cPacket);
-            Console.WriteLine($"[DIAG] OnRequestUpdate: replied UPDATE_RESULT structSize={System.Runtime.InteropServices.Marshal.SizeOf(typeof(PROTO_REQUEST_UPDATE_RESULT))}, srv0.ID={tUpdateRet.aServers[0].m_nServerID}, srv0.Count={tUpdateRet.aServers[0].m_nServerConnectCount}, sent={bSent}");
+
+            // The C++ reply is 100 x 12 = 1200 bytes; any other size means the row layout drifted.
+            CServerLog.GetLogger().info(
+                "REQUEST_UPDATE_RESULT sent={0} total={1}B row={2}B liveRows={3} | row0 id={4} status={5} count={6} event={7} | row1 id={8} count={9}",
+                bSent,
+                System.Runtime.InteropServices.Marshal.SizeOf(typeof(PROTO_REQUEST_UPDATE_RESULT)),
+                System.Runtime.InteropServices.Marshal.SizeOf(typeof(PROTO_GAMESERVER_UPDATE)),
+                nServerCount,
+                tUpdateRet.aServers[0].m_nServerID, tUpdateRet.aServers[0].m_nServerStatus,
+                tUpdateRet.aServers[0].m_nServerConnectCount, tUpdateRet.aServers[0].m_nEvent,
+                tUpdateRet.aServers[1].m_nServerID, tUpdateRet.aServers[1].m_nServerConnectCount);
         }
 
         private void OnRequestCharacterCreate(CLGUserContext cContext, CPacket cPacket)
@@ -1627,16 +1646,16 @@ namespace cf_loginsrv.Packet
         {
             var cContext = (CLGUserContext) tokenBase;
             
-            Console.WriteLine($"[DIAG] OnAccept called - IP: {cContext.IPAddress}, Port: {cContext.RemotePort}");
+            CServerLog.GetLogger().debug($"OnAccept - IP: {cContext.IPAddress}, Port: {cContext.RemotePort}");
             CServerLog.GetLogger().info("Accepted ({0}, {1})", cContext.IPAddress.ToString(), cContext.RemotePort);
             var nNewKey = CSocketController.GetLoginServer().GetNextClientKey();
             if (nNewKey == -1) // overflows!!!
             {
-                Console.WriteLine($"[DIAG] GetNextClientKey returned -1 (overflow)!");
+                CServerLog.GetLogger().error("GetNextClientKey returned -1 (overflow)!");
                 return;
             }
             
-            Console.WriteLine($"[DIAG] GetNextClientKey returned: {nNewKey}");
+            CServerLog.GetLogger().debug($"GetNextClientKey returned: {nNewKey}");
             CSocketController.GetLoginServer().SetSocketContext(nNewKey, cContext);
         }
 
@@ -1644,7 +1663,8 @@ namespace cf_loginsrv.Packet
         {
             var cPacket = new CPacket(buff);
             
-            Console.WriteLine($"[DIAG] OnNetworkMsg - Packet: First=0x{cPacket.GetFirstClass():X2}, Second=0x{cPacket.GetSecondClass():X2}, Third=0x{cPacket.GetThirdClass():X2}, Size={buff.Length}");
+            CServerLog.GetLogger().debug(
+                $"OnNetworkMsg - Packet: First=0x{cPacket.GetFirstClass():X2}, Second=0x{cPacket.GetSecondClass():X2}, Third=0x{cPacket.GetThirdClass():X2}, Size={buff.Length}");
             
             if (tokenBase == null)
             {
@@ -1678,7 +1698,8 @@ namespace cf_loginsrv.Packet
                     
                     swProcessTime.Stop();
 
-                    Console.WriteLine($"[DIAG] OnRcvLoginMsg handled Second=0x{cPacket.GetSecondClass():X2} -> {szProtoName ?? "(no handler)"}");
+                    CServerLog.GetLogger().debug(
+                        $"OnRcvLoginMsg handled Second=0x{cPacket.GetSecondClass():X2} -> {szProtoName ?? "(no handler)"}");
 
                     if (!string.IsNullOrEmpty(szProtoName))
                     {
@@ -1692,7 +1713,6 @@ namespace cf_loginsrv.Packet
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"[DIAG] OnRcvLoginMsg EXCEPTION: {e.Message}\r\n{e.StackTrace}");
                     CServerLog.GetLogger().error(
                         "[CGameNetworkHandler::OnNetworkMsg()] OnRcvLoginMsg Exception - {0}\r\n{1}",
                         e.Message, e.StackTrace);

@@ -1,7 +1,7 @@
-D:\download\ipgra v2 crossfire 3.0 source code (2)\Built\Debug\Network\Network.dll
-D:\download\ipgra v2 crossfire 3.0 source code (2)\Built\Debug\Network\Network.pdb
-D:\download\ipgra v2 crossfire 3.0 source code (2)\Libs\Network\obj\Debug\Network.csproj.AssemblyReference.cache
-D:\download\ipgra v2 crossfire 3.0 source code (2)\Libs\Network\obj\Debug\Network.csproj.CoreCompileInputs.cache
-D:\download\ipgra v2 crossfire 3.0 source code (2)\Libs\Network\obj\Debug\Network.csproj.Up2Date
-D:\download\ipgra v2 crossfire 3.0 source code (2)\Libs\Network\obj\Debug\Network.dll
-D:\download\ipgra v2 crossfire 3.0 source code (2)\Libs\Network\obj\Debug\Network.pdb
+D:\Works\reverse_cf\open_crossfire_server\Libs\Network\obj\Debug\Network.csproj.AssemblyReference.cache
+D:\Works\reverse_cf\open_crossfire_server\Libs\Network\obj\Debug\Network.csproj.CoreCompileInputs.cache
+D:\Works\reverse_cf\open_crossfire_server\Libs\Network\obj\Debug\Network.csproj.Up2Date
+D:\Works\reverse_cf\open_crossfire_server\Libs\Network\obj\Debug\Network.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Network\obj\Debug\Network.pdb
+D:\Works\reverse_cf\open_crossfire_server\Libs\Network\obj\Debug\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Network\obj\Debug\Commons.pdb

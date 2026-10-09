@@ -9,7 +9,7 @@ using cf_loginsrv.Util;
 using Commons.Log;
 using Commons.Version;
 using DBGWMGR;
-using PMSConn;
+//using PMSConn;
 using Security.SafeCall;
 
 using static Network.Protocol.P_SZ;
@@ -22,7 +22,7 @@ namespace cf_loginsrv
             CBuildTimeConverter.Convert(Assembly.GetExecutingAssembly().GetName().Version);
 
         private CSafeCall m_cSafeCall;
-        private CPMSConn m_cPmsConn;
+        //private CPMSConn m_cPmsConn;
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
@@ -32,11 +32,46 @@ namespace cf_loginsrv
             return Assembly.LoadFrom(dir + "\\" + ass + ".dll");
         }
 
+        // The reference binaries are built with MSVC Pack = 4 and these are their
+        // verified struct sizes. Any drift here shifts every field the client reads,
+        // which shows up as a login that succeeds but renders nothing.
+        private static void CheckProtocolSizes()
+        {
+            CheckStructSize("PROTO_GAMESERVER",
+                System.Runtime.InteropServices.Marshal.SizeOf(
+                    typeof(Network.ProtocolStruct.Login.PROTO_GAMESERVER)), 80);
+            CheckStructSize("PROTO_GAMESERVER_UPDATE",
+                System.Runtime.InteropServices.Marshal.SizeOf(
+                    typeof(Network.ProtocolStruct.Login.PROTO_GAMESERVER_UPDATE)), 12);
+            CheckStructSize("PROTO_LOGIN_INFO",
+                System.Runtime.InteropServices.Marshal.SizeOf(
+                    typeof(Network.ProtocolStruct.Login.PROTO_LOGIN_INFO)), 8084);
+            CheckStructSize("PROTO_REQUEST_CONNECT_RESULT",
+                System.Runtime.InteropServices.Marshal.SizeOf(
+                    typeof(Network.Protocol.LG_PK.PROTO_REQUEST_CONNECT_RESULT)), 8088);
+            CheckStructSize("PROTO_REQUEST_UPDATE_RESULT",
+                System.Runtime.InteropServices.Marshal.SizeOf(
+                    typeof(Network.Protocol.LG_PK.PROTO_REQUEST_UPDATE_RESULT)), 1200);
+        }
+
+        private static void CheckStructSize(string szName, int nSize, int nExpected)
+        {
+            if (nSize == nExpected)
+            {
+                CServerLog.GetLogger().info("[SIZE] {0} = {1} OK", szName, nSize);
+                return;
+            }
+
+            CServerLog.GetLogger().error(
+                "[SIZE] {0} = {1}, must be {2} - layout drifted from the binary",
+                szName, nSize, nExpected);
+        }
+
         private bool Initial()
         {
             if (!CServerConfig.GetInstance().InitConfig()) return false;
             
-            CServerLog.Init("cf_loginsrv", "crossfire/cf_loginsrv", "cf_loginsrv", 
+            CServerLog.Init("cf_loginsrv", "crossfire/cf_loginsrv", 
                 CServerConfig.GetBaseLogPath(), CServerConfig.GetLogLevel());
             CPublicLogger.SetLogger(CServerLog.GetLogger());
 
@@ -51,6 +86,8 @@ namespace cf_loginsrv
             CServerLog.GetLogger().info(
                 "MGMT SERVER PORT : {0} / LOGIN SERVER PORT : {1}", 
                 CServerConfig.GetMgmtRemotePort(), CServerConfig.GetServerRemotePort());
+
+            CheckProtocolSizes();
 
 #if DEBUG
             try
@@ -95,9 +132,9 @@ namespace cf_loginsrv
                 return false;
 #endif
 
-            m_cPmsConn = new CPMSConn("cf_loginsrv", CServerConfig.GetBaseLogPath(), CServerConfig.GetLogLevel());
-            if (!m_cPmsConn.Init())
-                CServerLog.GetLogger().info("PMSConn - NO Connect Or NO Argument!!!");
+            //m_cPmsConn = new CPMSConn("cf_loginsrv", CServerConfig.GetBaseLogPath(), CServerConfig.GetLogLevel());
+            //if (!m_cPmsConn.Init())
+            //    CServerLog.GetLogger().info("PMSConn - NO Connect Or NO Argument!!!");
 
             if (!CServerConfig.GetClientValidCheck())
                 CServerLog.GetLogger().info("NO Valid Check Client's Login Hashed Value!!!!");
@@ -131,8 +168,6 @@ namespace cf_loginsrv
             //    return false;
             //}
             CServerLog.GetLogger().info("SUCCESS_LoadServerDefaultData");
-
-            CServerLog.GetLogger().SetPacketInfoSetting(CServerConfig.GetServerRemoteAddr(), CServerLog.LOG_SHORT_NAME);
 
             if (!CMainServer.RunNetworkManager())
             {
@@ -172,7 +207,7 @@ namespace cf_loginsrv
 
         private void CleanUp()
         {
-            m_cPmsConn?.Stop();
+            //m_cPmsConn?.Stop();
             CMainServer.CleanUp();
             CServerDataManager.Terminate();
             CPerformanceChecker.Stop();
@@ -183,7 +218,7 @@ namespace cf_loginsrv
         {
             Console.WriteLine();
             Console.WriteLine("!!! cf_loginsrv Initial() FAILED - the server cannot start. !!!");
-            Console.WriteLine("!!! Check the log folder configured by ServerLogPath for details. !!!");
+            Console.WriteLine("!!! See the tagged console output above for the reason. !!!");
             Console.Write("Press Enter to exit...");
             try { Console.ReadLine(); } catch { }
             CleanUp();

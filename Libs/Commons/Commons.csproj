@@ -18,36 +18,10 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Built\Debug\Commons\</OutputPath>
+    <OutputPath>obj\Debug\Commons\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\Built\Release\Commons\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'BuddyDebug|AnyCPU' ">
-    <OutputPath>../../Built/Release/Commons/</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_CN|AnyCPU' ">
-    <OutputPath>bin\Release_CN\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_CN|AnyCPU' ">
-    <OutputPath>bin\Debug_CN\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMDebug_CN|AnyCPU' ">
-    <OutputPath>bin\CMMDebug_CN\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMRelease_CN|AnyCPU' ">
-    <OutputPath>bin\CMMRelease_CN\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

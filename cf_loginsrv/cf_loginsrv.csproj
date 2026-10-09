@@ -13,6 +13,9 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <LangVersion>8</LangVersion>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,30 +30,20 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <LangVersion>8</LangVersion>
-    <Nullable>disable</Nullable>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Built\Debug\cf_loginsrv</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <!-- Same run directory Debug_CN used, so the ServerInfo.ini/SecureCode.ini already
+       sitting there keep working; Commons/Network/this exe all build with Debug now. -->
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
+    <LangVersion>default</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>1</WarningLevel>
     <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\Built\Release\cf_loginsrv</OutputPath>
-    <DefineConstants>TRACE;RELEASE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -58,50 +51,11 @@
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'BuddyDebug|AnyCPU' ">
-    <OutputPath>../../Built/Debug/cf_loginsrv/</OutputPath>
-    <DefineConstants>DEBUG;TRACE;USE_BUDDY_PROFILER</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_CN|AnyCPU' ">
-    <OutputPath>../../Built/Release/cf_loginsrv/</OutputPath>
-    <DefineConstants>TRACE;RELEASE;USE_CFVIP_SYSTEM</DefineConstants>
-    <Optimize>true</Optimize>
-    <Prefer32bit>false</Prefer32bit>
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_CN|AnyCPU' ">
-    <OutputPath>../../Built/Debug/cf_loginsrv/</OutputPath>
-    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <LangVersion>default</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMDebug_CN|AnyCPU' ">
-    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <OutputPath>bin\CMMDebug_CN\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMRelease_CN|AnyCPU' ">
-    <DefineConstants>TRACE;RELEASE;USE_CFVIP_SYSTEM</DefineConstants>
-    <Optimize>true</Optimize>
-    <Prefer32bit>false</Prefer32bit>
-    <DebugType>pdbonly</DebugType>
-    <OutputPath>bin\CMMRelease_CN\</OutputPath>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Commons">
-      <HintPath>..\Libs\Commons\obj\Debug_CN\Commons.dll</HintPath>
-    </Reference>
     <Reference Include="DBGWManager">
       <HintPath>..\Libs\DBGWMGR\bin\Debug_CN\DBGWManager.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Network">
-      <HintPath>..\Libs\Network\obj\Debug_CN\Network.dll</HintPath>
-    </Reference>
     <Reference Include="PMSConn">
       <HintPath>..\Libs\PMSConn\obj\Debug_CN\PMSConn.dll</HintPath>
     </Reference>
@@ -115,6 +69,19 @@
     <Reference Include="System.Data" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <!-- Commons and Network are built from this tree. Their HintPaths pointed at DLLs that
+       Debug_CN never writes to, so resolution silently fell back to the prebuilt 2023
+       copies; binding to the projects themselves keeps the exe in sync with the source. -->
+  <ItemGroup>
+    <ProjectReference Include="..\Libs\Commons\Commons.csproj">
+      <Project>{523B25AD-BFD7-4A25-AC9A-DEE565510E3F}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libs\Network\Network.csproj">
+      <Project>{1646521E-31F8-476B-8931-BE658A91E322}</Project>
+      <Name>Network</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\ServerConfig_Base.cs" />

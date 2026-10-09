@@ -2,3 +2,8 @@ C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Commons\bin\D
 C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Commons\obj\Debug_CN\Commons.csproj.AssemblyReference.cache
 C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Commons\obj\Debug_CN\Commons.csproj.CoreCompileInputs.cache
 C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Commons\obj\Debug_CN\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\obj\Debug_CN\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\_buildtest_tmp\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\obj\Debug_CN\Commons.csproj.AssemblyReference.cache
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\obj\Debug_CN\Commons.csproj.CoreCompileInputs.cache
+D:\Works\reverse_cf\open_crossfire_server\Libs\Commons\bin\Debug_CN\Commons.dll

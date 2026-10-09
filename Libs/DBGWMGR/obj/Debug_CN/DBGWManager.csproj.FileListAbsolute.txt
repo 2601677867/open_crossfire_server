@@ -8,3 +8,19 @@ C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\bin\D
 C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\bin\Debug_CN\Security.pdb
 C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\obj\Debug_CN\DBGWManager.csproj.CopyComplete
 C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\obj\Debug_CN\DBGWManager.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\_buildtest_tmp\DBGWManager.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\_buildtest_tmp\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\_buildtest_tmp\Network.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\_buildtest_tmp\Security.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\_buildtest_tmp\Network.pdb
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\_buildtest_tmp\Security.pdb
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\obj\Debug_CN\DBGWManager.csproj.AssemblyReference.cache
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\obj\Debug_CN\DBGWManager.csproj.CoreCompileInputs.cache
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\obj\Debug_CN\DBGWMana.A1F00322.Up2Date
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\obj\Debug_CN\DBGWManager.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\bin\Debug_CN\DBGWManager.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\bin\Debug_CN\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\bin\Debug_CN\Network.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\bin\Debug_CN\Security.dll
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\bin\Debug_CN\Network.pdb
+D:\Works\reverse_cf\open_crossfire_server\Libs\DBGWMGR\bin\Debug_CN\Security.pdb

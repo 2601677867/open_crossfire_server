@@ -518,9 +518,15 @@ namespace cf_loginsrv.Packet
             }
             else
             {
+                // First class 0 is the LOGIN protocol, so such a packet on this socket means a
+                // game client was pointed at the mgmt port (mgmt = ServerServiceForcePort,
+                // login = ServerServiceForcePort + 1) instead of the login port.
                 CServerLog.GetLogger().etcinfo(
-                    "[CMgmtNetworkHandler::OnNetworkMsg()] Invalid Packet First {0}",
-                    cPacket.GetFirstClass());
+                    "[CMgmtNetworkHandler::OnNetworkMsg()] Invalid Packet First {0}{1}",
+                    cPacket.GetFirstClass(),
+                    cPacket.GetFirstClass() == 0
+                        ? " - LOGIN client on the MGMT port; point the client at ServerServiceForcePort + 1"
+                        : "");
             }
         }
         

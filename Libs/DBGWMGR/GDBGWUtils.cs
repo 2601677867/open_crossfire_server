@@ -53,31 +53,22 @@ namespace DBGWMGR
 
         public static void PrintTimeInfo(string context, params object[] args)
         {
-            CPublicLogger.GetLogger().print("timeinfo", context, args, 
-                CPublicLogger.GetLogger().GetHostName(), 
-                CPublicLogger.GetLogger().GetName(),
-                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            CPublicLogger.GetLogger().PrintToConsole(context, "timeinfo", args);
         }
 
         public static void PrintDelayInfo(string context, params object[] args)
         {
-            CPublicLogger.GetLogger().print("DELAYQUERY", context, args, 
-                sm_szRemoteIP, sm_szServerName, 
-                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            CPublicLogger.GetLogger().PrintToConsole(context, "DELAYQUERY", args);
         }
 
         public static void PrintDBError(string context, params object[] args)
         {
-            CPublicLogger.GetLogger().print("1_ERROR", context, args, 
-                sm_szRemoteIP, sm_szServerName,
-                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            CPublicLogger.GetLogger().PrintToConsole(context, "1_ERROR", args);
         }
         
         public static void PrintManagerInfo(string context, params object[] args)
         {
-            CPublicLogger.GetLogger().print("DBGWM_LOG", context, args,
-                sm_szRemoteIP, sm_szServerName,
-                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            CPublicLogger.GetLogger().PrintToConsole(context, "DBGWM_LOG", args);
         }
         
         #endregion

@@ -65,15 +65,10 @@ namespace DBGWMGR
             GDBGWUtils.SetServerInfo(szRemoteIP, szServerName);
             m_cRunner = new CGDBGWRunner(szClientIP, usClientPort, m_nRecvTimeout, m_aQueryList);
             
-            if (!Directory.Exists($"{CPublicLogger.GetLogger().GetBaseLogPath()}/DBGWManager"))
-            {
-                Directory.CreateDirectory($"{CPublicLogger.GetLogger().GetBaseLogPath()}/DBGWManager");
-            }
-            
-            CPublicLogger.GetLogger().GetFormatter().AddFormatter("DELAYQUERY", "{0}\t{1}\t{2}\t{3}", LOGLEVEL.LEVEL_FATAL, false, ConsoleColor.DarkYellow,
-                false, "{0}/{1}/{2}/1_DELAY_QUERY_{6}.log");
-            CPublicLogger.GetLogger().GetFormatter().AddFormatter("DBGWM_LOG", "{0}\t{1}\t{2}\t{3}", LOGLEVEL.LEVEL_FATAL, false, ConsoleColor.DarkYellow,
-                false, "{0}/DBGWManager/DBGWManager_{5}_{6}.log");
+            CPublicLogger.GetLogger().GetFormatter().AddChannel("DELAYQUERY", "DB", LOGLEVEL.LEVEL_WARN,
+                ConsoleColor.DarkYellow);
+            CPublicLogger.GetLogger().GetFormatter().AddChannel("DBGWM_LOG", "DB", LOGLEVEL.LEVEL_INFO,
+                ConsoleColor.DarkYellow);
             
             GDBGWUtils.PrintManagerInfo("Server started");
         }

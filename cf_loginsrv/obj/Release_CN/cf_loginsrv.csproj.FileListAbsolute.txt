@@ -1,8 +1,0 @@
-C:\Users\PlayMaker\Desktop\Built\Release\cf_loginsrv\cf_loginsrv.exe.config
-C:\Users\PlayMaker\Desktop\Built\Release\cf_loginsrv\cf_loginsrv.exe
-C:\Users\PlayMaker\Desktop\Built\Release\cf_loginsrv\cf_loginsrv.pdb
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Release_CN\cf_loginsrv.csproj.AssemblyReference.cache
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Release_CN\cf_loginsrv.csproj.CoreCompileInputs.cache
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Release_CN\cf_loginsrv.csproj.CopyComplete
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Release_CN\cf_loginsrv.exe
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Release_CN\cf_loginsrv.pdb

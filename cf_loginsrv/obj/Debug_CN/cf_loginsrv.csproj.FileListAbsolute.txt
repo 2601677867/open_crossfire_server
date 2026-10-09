@@ -1,18 +1,19 @@
-M:\Built\Debug\cf_loginsrv\cf_loginsrv.exe.config
-M:\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Debug_CN\cf_loginsrv.csprojResolveAssemblyReference.cache
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Debug_CN\cf_loginsrv.csproj.AssemblyReference.cache
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Debug_CN\cf_loginsrv.csproj.CoreCompileInputs.cache
-C:\Users\PlayMaker\Desktop\Built\Debug\cf_loginsrv\cf_loginsrv.exe.config
-C:\Users\PlayMaker\Desktop\Built\Debug\cf_loginsrv\cf_loginsrv.exe
-C:\Users\PlayMaker\Desktop\Built\Debug\cf_loginsrv\cf_loginsrv.pdb
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Debug_CN\cf_loginsrv.csproj.CopyComplete
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Debug_CN\cf_loginsrv.exe
-C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\Debug_CN\cf_loginsrv.pdb
-D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\Debug_CN\cf_loginsrv.csproj.AssemblyReference.cache
-D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\Debug_CN\cf_loginsrv.csproj.CoreCompileInputs.cache
-D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\Debug_CN\cf_loginsrv.exe
-D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\Debug_CN\cf_loginsrv.pdb
-D:\download\Built\Debug\cf_loginsrv\cf_loginsrv.exe.config
-D:\download\Built\Debug\cf_loginsrv\cf_loginsrv.exe
-D:\download\Built\Debug\cf_loginsrv\cf_loginsrv.pdb
-D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\Debug_CN\cf_login.52C42B59.Up2Date
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\cf_loginsrv.exe.config
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\cf_loginsrv.exe
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\cf_loginsrv.pdb
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\Commons.dll
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\DBGWManager.dll
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\Network.dll
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\PMSConn.dll
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\Security.dll
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\Network.pdb
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\PMSConn.pdb
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\_tmpbuild\Security.pdb
+D:\Works\reverse_cf\Built\Debug\cf_loginsrv\cf_loginsrv.exe.config
+D:\Works\reverse_cf\Built\Debug\cf_loginsrv\cf_loginsrv.exe
+D:\Works\reverse_cf\Built\Debug\cf_loginsrv\cf_loginsrv.pdb
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\obj\Debug_CN\cf_loginsrv.csproj.AssemblyReference.cache
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\obj\Debug_CN\cf_loginsrv.csproj.CoreCompileInputs.cache
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\obj\Debug_CN\cf_login.52C42B59.Up2Date
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\obj\Debug_CN\cf_loginsrv.exe
+D:\Works\reverse_cf\open_crossfire_server\cf_loginsrv\obj\Debug_CN\cf_loginsrv.pdb

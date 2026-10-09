@@ -1,74 +1,105 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Commons.Log
 {
+    /// <summary>
+    ///     Registry of console channels: every log type maps to a 【TAG】, a verbosity and a color.
+    /// </summary>
     public class CLogFormatter
     {
-        private readonly Dictionary<string, string> CUSTOM_FILE_FORMATTER = new Dictionary<string, string>();
-        private readonly Dictionary<string, string> CUSTOM_FORMATTER = new Dictionary<string, string>();
+        private class SChannel
+        {
+            public string m_sTag;
+            public string m_sFormatter;
+            public LOGLEVEL m_eLevel;
+            public ConsoleColor m_pColor;
+        }
 
-        private readonly Dictionary<string, ConsoleColor> CUSTOM_FORMATTER_COLOR =
-            new Dictionary<string, ConsoleColor>();
-
-        private readonly Dictionary<string, bool> CUSTOM_FORMATTER_CSV = new Dictionary<string, bool>();
-        private readonly Dictionary<string, LOGLEVEL> CUSTOM_FORMATTER_LEVEL = new Dictionary<string, LOGLEVEL>();
-        private readonly Dictionary<string, int> CUSTOM_FORMATTER_TIME_DIV = new Dictionary<string, int>();
+        private readonly Dictionary<string, SChannel> m_pChannels = new Dictionary<string, SChannel>();
 
         public bool Exists(string type)
         {
-            return CUSTOM_FORMATTER.TryGetValue(type, out _);
+            return m_pChannels.ContainsKey(type);
         }
 
         public string GetFormatter(string type)
         {
-            CUSTOM_FORMATTER.TryGetValue(type, out var formatter);
-            return formatter;
-        }
-
-        public string GetFileFormatter(string type)
-        {
-            CUSTOM_FILE_FORMATTER.TryGetValue(type, out var formatter);
-            return formatter;
+            SChannel pChannel;
+            return m_pChannels.TryGetValue(type, out pChannel) ? pChannel.m_sFormatter : null;
         }
 
         public LOGLEVEL GetLevel(string type)
         {
-            CUSTOM_FORMATTER_LEVEL.TryGetValue(type, out var level);
-            return level;
-        }
-
-        public bool GetCSV(string type)
-        {
-            CUSTOM_FORMATTER_CSV.TryGetValue(type, out var csv);
-            return csv;
+            SChannel pChannel;
+            return m_pChannels.TryGetValue(type, out pChannel) ? pChannel.m_eLevel : LOGLEVEL.LEVEL_INFO;
         }
 
         public ConsoleColor GetColor(string type)
         {
-            CUSTOM_FORMATTER_COLOR.TryGetValue(type, out var color);
-            return color;
-        }
-        
-        public int GetTimeDiv(string type)
-        {
-            CUSTOM_FORMATTER_TIME_DIV.TryGetValue(type, out var timeDiv);
-            return timeDiv;
+            SChannel pChannel;
+            return m_pChannels.TryGetValue(type, out pChannel) ? pChannel.m_pColor : ConsoleColor.Gray;
         }
 
+        public string GetTag(string type)
+        {
+            SChannel pChannel;
+            if (!m_pChannels.TryGetValue(type, out pChannel)) return TagOfLevel(LOGLEVEL.LEVEL_INFO);
+            return pChannel.m_sTag ?? TagOfLevel(pChannel.m_eLevel);
+        }
+
+        /// <summary>
+        ///     Register a console channel; the log line is the formatted message itself.
+        /// </summary>
+        public void AddChannel(string type, string tag, LOGLEVEL level, ConsoleColor color)
+        {
+            m_pChannels[type] = new SChannel
+            {
+                m_sTag = tag,
+                m_sFormatter = null,
+                m_eLevel = level,
+                m_pColor = color
+            };
+        }
+
+        /// <summary>
+        ///     Register a channel whose line is built from a positional template filled with the caller's
+        ///     context objects. Used by <see cref="CBaseLogHelper.print"/> calls that still pass extra fields.
+        /// </summary>
+        public void AddFormatter(string type, string formatter, LOGLEVEL level, ConsoleColor color, string tag)
+        {
+            m_pChannels[type] = new SChannel
+            {
+                m_sTag = tag,
+                m_sFormatter = formatter,
+                m_eLevel = level,
+                m_pColor = color
+            };
+        }
+
+        /// <summary>
+        ///     Legacy signature kept because pre-built DLLs (PMSConn, gDBGW gateway) call it with the
+        ///     file target and time-slicing arguments; those are ignored now that nothing is written to disk.
+        /// </summary>
         public void AddFormatter(string type, string formatter, LOGLEVEL level, bool csv,
             ConsoleColor color = ConsoleColor.Gray, bool enableTypeLog = true, string customFileFormatter = null,
             int timeDiv = 3)
         {
-            CUSTOM_FORMATTER.Add(type, formatter);
-            CUSTOM_FORMATTER_LEVEL.Add(type, level);
-            CUSTOM_FORMATTER_CSV.Add(type, csv);
-            CUSTOM_FORMATTER_COLOR.Add(type, color);
-            if (customFileFormatter == null)
-                customFileFormatter =
-                    enableTypeLog ? "{0}/{1}/{2}/{3}_{4}_{5}_{6}_{7}.log" : "{0}/{1}/{2}/{4}_{5}_{6}_{7}.log";
-            CUSTOM_FILE_FORMATTER.Add(type, customFileFormatter);
-            CUSTOM_FORMATTER_TIME_DIV.Add(type, timeDiv);
+            AddFormatter(type, formatter, level, color, null);
+        }
+
+        private static string TagOfLevel(LOGLEVEL level)
+        {
+            switch (level)
+            {
+                case LOGLEVEL.LEVEL_FATAL: return "FATAL";
+                case LOGLEVEL.LEVEL_ERROR: return "ERROR";
+                case LOGLEVEL.LEVEL_WARN: return "WARN";
+                case LOGLEVEL.LEVEL_INFO: return "INFO";
+                case LOGLEVEL.LEVEL_DEBUG: return "DEBUG";
+                case LOGLEVEL.LEVEL_TRACE: return "TRACE";
+                default: return "LOG";
+            }
         }
     }
 }

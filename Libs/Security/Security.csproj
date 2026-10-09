@@ -54,10 +54,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMRelease_CN|AnyCPU' ">
     <OutputPath>bin\CMMRelease_CN\</OutputPath>
   </PropertyGroup>
+  <!-- Commons builds Debug-only now and no longer writes to bin\Debug_CN. -->
   <ItemGroup>
-    <Reference Include="Commons">
-      <HintPath>..\Commons\bin\Debug_CN\Commons.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Commons\Commons.csproj">
+      <Project>{523B25AD-BFD7-4A25-AC9A-DEE565510E3F}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

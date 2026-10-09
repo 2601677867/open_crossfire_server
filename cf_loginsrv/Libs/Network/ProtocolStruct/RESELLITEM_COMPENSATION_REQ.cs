@@ -1,9 +1,0 @@
-namespace Network.ProtocolStruct
-{
-    public enum RESELLITEM_COMPENSATION_REQ
-    {
-        RESELLITEM_COMPENSATION_REQ_SUCCESS,
-        RESELLITEM_COMPENSATION_REQ_NOITEM,
-        RESELLITEM_COMPENSATION_REQ_FAIL
-    }
-}

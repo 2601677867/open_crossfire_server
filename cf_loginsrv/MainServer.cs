@@ -37,7 +37,7 @@ namespace cf_loginsrv
 #if DEBUG
         // DEBUG-only fake game server, so the client sees a server list even without
         // GDBGW/SQL. Name is fixed to "TEST"; there is exactly one such entry.
-        public const string DEBUG_TEST_SERVER_NAME = "假的测试服务器";
+        public const string DEBUG_TEST_SERVER_NAME = "测试服务器";
         // ID 0 is treated as "no server" by some client paths - use 1 instead.
         private const short DEBUG_TEST_SERVER_ID = 1;
         private const int DEBUG_TEST_SERVER_PORT = 10009; // cf_gamesrv default game port
@@ -187,8 +187,8 @@ namespace cf_loginsrv
         }
 
 #if DEBUG
-        // Injects a single fake server named "TEST" into the server list. Only used in
-        // DEBUG builds when no real server list could be loaded from GDBGW.
+        // Injects the DEBUG fake game server into the server list (name/addr/port).
+        // Only used in DEBUG builds when no real list could be loaded from GDBGW.
         public static void EnsureDebugServerList()
         {
             if (m_aGameServers == null) return;

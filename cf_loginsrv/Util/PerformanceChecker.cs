@@ -32,34 +32,29 @@ namespace cf_loginsrv.Util
         private static PerformanceCounter networkPRCounter;
         private static PerformanceCounter networkPSCounter;
 
-        private static void PrintCPUInfo(string context, params object[] args)
+        private static void PrintCPUInfo(string context)
         {
-            CServerLog.GetLogger().print("CPUINFO", context, args, CServerConfig.GetServerRemoteAddr(),
-                name, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            CServerLog.GetLogger().PrintToConsole("cpu {0}", "CPUINFO", context);
         }
 
-        private static void PrintMemInfo(string context, params object[] args)
+        private static void PrintMemInfo(string context)
         {
-            CServerLog.GetLogger().print("MEMINFO", context, args, CServerConfig.GetServerRemoteAddr(),
-                name, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            CServerLog.GetLogger().PrintToConsole("mem {0}", "MEMINFO", context);
         }
 
-        private static void PrintNetworkInfo(string context, params object[] args)
+        private static void PrintNetworkInfo(string context)
         {
-            CServerLog.GetLogger().print("NETWORKINFO", context, args, CServerConfig.GetServerRemoteAddr(),
-                name, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            CServerLog.GetLogger().PrintToConsole("net {0}", "NETWORKINFO", context);
         }
         
-        private static void PrintPacketCntInfo(string context, params object[] args)
+        private static void PrintPacketCntInfo(string context)
         {
-            CServerLog.GetLogger().print("PACKETCNT", context, args, CServerConfig.GetServerRemoteAddr(),
-                name, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            CServerLog.GetLogger().PrintToConsole("free/abandoned/received/buffer {0}", "PACKETCNT", context);
         }
         
-        private static void PrintIOBufferInfo(string context, params object[] args)
+        private static void PrintIOBufferInfo(string context)
         {
-            CServerLog.GetLogger().print("IOBUFFER", context, args, CServerConfig.GetServerRemoteAddr(),
-                name, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"));
+            CServerLog.GetLogger().PrintToConsole("iobuffer {0}", "IOBUFFER", context);
         }
 
         private static void TPacketCnt(object sender, ElapsedEventArgs e)
@@ -203,16 +198,12 @@ namespace cf_loginsrv.Util
             networkCBCounter.NextValue(); // Skip Value 0
 
 
-            CServerLog.GetLogger().GetFormatter().AddFormatter("CPUINFO", "{0}\t{1}\t{2}\t{3}", LOGLEVEL.LEVEL_FATAL, false, ConsoleColor.Gray,
-                false, "{0}/{1}/{2}/1_CPU_INFO_{6}.log");
-            CServerLog.GetLogger().GetFormatter().AddFormatter("MEMINFO", "{0}\t{1}\t{2}\t{3}", LOGLEVEL.LEVEL_FATAL, false, ConsoleColor.Gray,
-                false, "{0}/{1}/{2}/1_MEMORY_INFO_{6}.log");
-            CServerLog.GetLogger().GetFormatter().AddFormatter("NETWORKINFO", "{0}\t{1}\t{2}\t{3}", LOGLEVEL.LEVEL_FATAL, false,
-                ConsoleColor.Gray, false, "{0}/{1}/{2}/1_NETWORK_{6}.log");
-            CServerLog.GetLogger().GetFormatter().AddFormatter("PACKETCNT", "{0}\t{1}\t{2}\t{3}", LOGLEVEL.LEVEL_FATAL, false,
-                ConsoleColor.Gray, false, "{0}/{1}/{2}/1_PACKET_CNT_{6}.log");
-            CServerLog.GetLogger().GetFormatter().AddFormatter("IOBUFFER", "{0}\t{1}\t{2}\t{3}", LOGLEVEL.LEVEL_FATAL, false,
-                ConsoleColor.Gray, false, "{0}/{1}/{2}/1_IOBUFFER_INFO_{6}.log");
+            var pFormatter = CServerLog.GetLogger().GetFormatter();
+            pFormatter.AddChannel("CPUINFO", "PERF", LOGLEVEL.LEVEL_ALL, ConsoleColor.DarkMagenta);
+            pFormatter.AddChannel("MEMINFO", "PERF", LOGLEVEL.LEVEL_ALL, ConsoleColor.DarkMagenta);
+            pFormatter.AddChannel("NETWORKINFO", "PERF", LOGLEVEL.LEVEL_ALL, ConsoleColor.DarkMagenta);
+            pFormatter.AddChannel("PACKETCNT", "PERF", LOGLEVEL.LEVEL_ALL, ConsoleColor.DarkMagenta);
+            pFormatter.AddChannel("IOBUFFER", "PERF", LOGLEVEL.LEVEL_ALL, ConsoleColor.DarkMagenta);
         }
 
         public static void Start()
