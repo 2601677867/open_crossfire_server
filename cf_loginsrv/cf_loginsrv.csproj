@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A2F0B75E-9118-456E-8BE2-12297C5123ED}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>cf_loginsrv</RootNamespace>
+    <AssemblyName>cf_loginsrv</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <LangVersion>8</LangVersion>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Built\Debug\cf_loginsrv</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Built\Release\cf_loginsrv</OutputPath>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'BuddyDebug|AnyCPU' ">
+    <OutputPath>../../Built/Debug/cf_loginsrv/</OutputPath>
+    <DefineConstants>DEBUG;TRACE;USE_BUDDY_PROFILER</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_CN|AnyCPU' ">
+    <OutputPath>../../Built/Release/cf_loginsrv/</OutputPath>
+    <DefineConstants>TRACE;RELEASE;USE_CFVIP_SYSTEM</DefineConstants>
+    <Optimize>true</Optimize>
+    <Prefer32bit>false</Prefer32bit>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_CN|AnyCPU' ">
+    <OutputPath>../../Built/Debug/cf_loginsrv/</OutputPath>
+    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMDebug_CN|AnyCPU' ">
+    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\CMMDebug_CN\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMRelease_CN|AnyCPU' ">
+    <DefineConstants>TRACE;RELEASE;USE_CFVIP_SYSTEM</DefineConstants>
+    <Optimize>true</Optimize>
+    <Prefer32bit>false</Prefer32bit>
+    <DebugType>pdbonly</DebugType>
+    <OutputPath>bin\CMMRelease_CN\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Commons">
+      <HintPath>..\Libs\Commons\obj\Debug_CN\Commons.dll</HintPath>
+    </Reference>
+    <Reference Include="DBGWManager">
+      <HintPath>..\Libs\DBGWMGR\bin\Debug_CN\DBGWManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Network">
+      <HintPath>..\Libs\Network\obj\Debug_CN\Network.dll</HintPath>
+    </Reference>
+    <Reference Include="PMSConn">
+      <HintPath>..\Libs\PMSConn\obj\Debug_CN\PMSConn.dll</HintPath>
+    </Reference>
+    <Reference Include="Security">
+      <HintPath>..\Libs\Security\bin\Debug_CN\Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config\ServerConfig_Base.cs" />
+    <Compile Include="Config\ServerConfig_Load.cs" />
+    <Compile Include="Config\ServerConfig.cs" />
+    <Compile Include="Config\ServerConfig_SettingCheck.cs" />
+    <Compile Include="LoginServer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Application.cs" />
+    <Compile Include="Log\ServerLog.cs" />
+    <Compile Include="MainServer.cs" />
+    <Compile Include="Packet\BaseNetworkHandler.cs" />
+    <Compile Include="Packet\GameNetworkHandler.cs" />
+    <Compile Include="Packet\GameNetworkHandler_CheckDuplicate.cs" />
+    <Compile Include="Packet\LLSMgmtNetworkHandler.cs" />
+    <Compile Include="Packet\MgmtNetworkHandler.cs" />
+    <Compile Include="Packet\GameNetworkHandler_ProcessFinishedClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerStruct\GAMESERVER.cs" />
+    <Compile Include="Socket\CBaseNetworkMgr.cs" />
+    <Compile Include="Socket\SocketController.cs" />
+    <Compile Include="Socket\NetworkMgr.cs" />
+    <Compile Include="Socket\LGUserContext.cs" />
+    <Compile Include="Util\FameSystem.cs" />
+    <Compile Include="Util\GlobalThreads.cs" />
+    <Compile Include="Util\LoginHash.cs" />
+    <Compile Include="Util\PerformanceChecker.cs" />
+    <Compile Include="Util\LLSMgmtClient.cs" />
+    <Compile Include="Util\ServerDataManager.cs" />
+    <Compile Include="Util\SharedMethod.cs" />
+    <Compile Include="Util\SharedVariable.cs" />
+    <Compile Include="Util\UpdateDomainInfo.cs" />
+    <Compile Include="Util\ProtectedKey.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

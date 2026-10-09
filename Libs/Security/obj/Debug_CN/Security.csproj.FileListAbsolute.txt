@@ -1,0 +1,8 @@
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\obj\Debug_CN\Security.csproj.AssemblyReference.cache
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\obj\Debug_CN\Security.csproj.CoreCompileInputs.cache
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\bin\Debug_CN\Security.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\bin\Debug_CN\Security.pdb
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\bin\Debug_CN\Commons.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\obj\Debug_CN\Security.csproj.CopyComplete
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\obj\Debug_CN\Security.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\Security\obj\Debug_CN\Security.pdb

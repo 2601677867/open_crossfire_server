@@ -1,0 +1,19 @@
+namespace Network.ProtocolStruct.Login
+{
+    public enum CONNECTRESULT
+    {
+        CONNECT_SUCCESS,
+        CONNECT_UNKNOWNERROR,
+        CONNECT_DUPLICATE,
+        CONNECT_TIMEOUT,
+        CONNECT_INVALID_USERNAME_OR_PASSWORD,
+        CONNECT_FAIL,
+        CONNECT_CREATE_CHARACTER,
+        CONNECT_NO_ACCESS,
+        CONNECT_CLIENT_OUTDATED,
+        CONNECT_BANNED,
+        CONNECT_RESPONSE_BLANK,
+        CONNECT_FOREVER_BANNED,
+        CONNECT_IP_BLOCKED // MSZ 18018, <- CN 跨区作战
+    }
+}

@@ -1,0 +1,10 @@
+namespace Network.ProtocolStruct
+{
+    public enum ROOMTEAMCHANGE
+    {
+    	ROOMTEAMCHANGE_SUCCESS,
+    	ROOMTEAMCHANGE_FAIL,
+    	ROOMTEAMCHANGE_FULL,
+    	ROOMTEAMCHANGE_UNKNOWNERROR
+    }
+}

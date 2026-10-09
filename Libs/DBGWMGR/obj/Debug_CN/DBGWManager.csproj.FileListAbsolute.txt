@@ -1,0 +1,10 @@
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\obj\Debug_CN\DBGWManager.csproj.AssemblyReference.cache
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\obj\Debug_CN\DBGWManager.csproj.CoreCompileInputs.cache
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\bin\Debug_CN\DBGWManager.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\bin\Debug_CN\Commons.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\bin\Debug_CN\Network.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\bin\Debug_CN\Security.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\bin\Debug_CN\Network.pdb
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\bin\Debug_CN\Security.pdb
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\obj\Debug_CN\DBGWManager.csproj.CopyComplete
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\DBGWMGR\obj\Debug_CN\DBGWManager.dll

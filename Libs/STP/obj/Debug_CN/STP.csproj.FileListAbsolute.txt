@@ -1,0 +1,4 @@
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\STP\bin\Debug_CN\STP.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\STP\obj\Debug_CN\STP.csproj.AssemblyReference.cache
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\STP\obj\Debug_CN\STP.csproj.CoreCompileInputs.cache
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\Libs\STP\obj\Debug_CN\STP.dll

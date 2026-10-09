@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1646521E-31F8-476B-8931-BE658A91E322}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Network</RootNamespace>
+    <AssemblyName>Network</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <LangVersion>8</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Built\Debug\Network\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Built\Release\Network\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'BuddyDebug|AnyCPU' ">
+    <OutputPath>../../Built/Debug/Network/</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_CN|AnyCPU' ">
+    <OutputPath>../../Built/Release/Network/</OutputPath>
+    <DefineConstants>TRACE;USE_CFVIP_SYSTEM</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_CN|AnyCPU' ">
+    <OutputPath>../../Built/Debug/Network/</OutputPath>
+    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMDebug_CN|AnyCPU' ">
+    <DefineConstants>DEBUG;TRACE;USE_CFVIP_SYSTEM</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\CMMDebug_CN\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMMRelease_CN|AnyCPU' ">
+    <DefineConstants>TRACE;USE_CFVIP_SYSTEM</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <OutputPath>bin\CMMRelease_CN\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Commons">
+      <HintPath>..\Commons\bin\Debug_CN\Commons.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assert\ProtocolAssert.cs" />
+    <Compile Include="Assert\ProtocolSizeException.cs" />
+    <Compile Include="Client\GameServerClient.cs" />
+    <Compile Include="IPNetworking.cs" />
+    <Compile Include="Packet\BufferWriter.cs" />
+    <Compile Include="Packet\ClanServerPacket.cs" />
+    <Compile Include="Packet\Packet.cs" />
+    <Compile Include="Packet\PacketWriter.cs" />
+    <Compile Include="Packet\SirPacket.cs" />
+    <Compile Include="Protocol\BILLING_PK.cs" />
+    <Compile Include="Protocol\BUDDY_PK.cs" />
+    <Compile Include="Protocol\CHATTING_PK.cs" />
+    <Compile Include="Protocol\CMM_PK.cs" />
+    <Compile Include="Protocol\GDBGW_PK.cs" />
+    <Compile Include="Protocol\GMS_PK.cs" />
+    <Compile Include="Protocol\HA_PK.cs" />
+    <Compile Include="Protocol\HA_SZ.cs" />
+    <Compile Include="Protocol\LG_PK.cs" />
+    <Compile Include="Protocol\LLSM_PK.cs" />
+    <Compile Include="Protocol\LMS_PK.cs" />
+    <Compile Include="Protocol\MA_PK.cs" />
+    <Compile Include="HashMaker\HashMaker.cs" />
+    <Compile Include="Packet\BufferReader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\MMACTION.cs" />
+    <Compile Include="Protocol\MM_PK.cs" />
+    <Compile Include="Protocol\MS_PK.cs" />
+    <Compile Include="Protocol\NCLS_PK.cs" />
+    <Compile Include="Protocol\P_ATNM.cs" />
+    <Compile Include="Protocol\P_MMC.cs" />
+    <Compile Include="Protocol\P_IGC.cs" />
+    <Compile Include="Protocol\P_SZ.cs" />
+    <Compile Include="Protocol\SP_PK.cs" />
+    <Compile Include="Protocol\SV_PK.cs" />
+    <Compile Include="Protocol\SPECTATING_PK.cs" />
+    <Compile Include="Protocol\WAVE_PK.cs" />
+    <Compile Include="ProtocolStruct\ACCEPTRESULT.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_CATEGORY.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_CHECK_POINT.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_PASSIVE_BUYITEM_TYPE.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_PASSIVE_GACHA_OPEN.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_PASSIVE_GAMEEND_TYPE.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_PASSIVE_HOST_TYPE.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_PASSIVE_LIMIT_TYPE.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_PASSIVE_REWARD_TYPE.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_PASSIVE_TYPE.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_STATUS.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_ACHIEVE_VALUE.cs" />
+    <Compile Include="ProtocolStruct\Achievement\E_DISPLAY_ACHIEVE_TYPE.cs" />
+    <Compile Include="ProtocolStruct\Achievement\ST_ACHIEVE_DISPLAY.cs" />
+    <Compile Include="ProtocolStruct\Achievement\ST_ACHIEVE_OBJECT.cs" />
+    <Compile Include="ProtocolStruct\Achievement\ST_ACHIEVE_PASSIVE.cs" />
+    <Compile Include="ProtocolStruct\Achievement\ST_ACHIEVE_USER_DATA.cs" />
+    <Compile Include="ProtocolStruct\Achievement\ST_OBJECT.cs" />
+    <Compile Include="ProtocolStruct\Achievement\ST_SUB_OBJECT.cs" />
+    <Compile Include="ProtocolStruct\AIPrizeItemInfo.cs" />
+    <Compile Include="ProtocolStruct\AISUBMODE.cs" />
+    <Compile Include="ProtocolStruct\ATT_REWARDTYPE.cs" />
+    <Compile Include="ProtocolStruct\BUYITEM.cs" />
+    <Compile Include="ProtocolStruct\CFVersion\CF_VERIFIER_VALIDATION_ACK_MSG.cs" />
+    <Compile Include="ProtocolStruct\CFVersion\CF_VERIFIER_VALIDATION_REQ_MSG.cs" />
+    <Compile Include="ProtocolStruct\CFVersion\CF_VERIFIER_VERSION_ACK_MSG.cs" />
+    <Compile Include="ProtocolStruct\CFVersion\CF_VERIFIER_VERSION_REQ_MSG.cs" />
+    <Compile Include="ProtocolStruct\CHANGEBOSTDATA.cs" />
+    <Compile Include="ProtocolStruct\CHANGEUSERLIST.cs" />
+    <Compile Include="ProtocolStruct\CHANNELROOM.cs" />
+    <Compile Include="ProtocolStruct\CHANNELUSER.cs" />
+    <Compile Include="ProtocolStruct\CHCONNECTRESULT.cs" />
+    <Compile Include="ProtocolStruct\CHLEAVERESULT.cs" />
+    <Compile Include="ProtocolStruct\CLANGAMETYPE.cs" />
+    <Compile Include="ProtocolStruct\CLANID.cs" />
+    <Compile Include="ProtocolStruct\Host\JOIN_HOST_RESULT.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_JOIN_HOST.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_JOIN_HOST_RESULT.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_START_HOST_RESULT.cs" />
+    <Compile Include="ProtocolStruct\ITEM_PROPERTY.cs" />
+    <Compile Include="ProtocolStruct\PROTO_MYCLANINFO.cs" />
+    <Compile Include="ProtocolStruct\CLAN_UNIT_INFO.cs" />
+    <Compile Include="ProtocolStruct\DAILY_ATTEND.cs" />
+    <Compile Include="ProtocolStruct\DEATHMATCHTYPE.cs" />
+    <Compile Include="ProtocolStruct\DISCONNECTRESULT.cs" />
+    <Compile Include="ProtocolStruct\ECALLNAME_RET.cs" />
+    <Compile Include="ProtocolStruct\ECHATTING_RET.cs" />
+    <Compile Include="ProtocolStruct\EUCCSPRAY_RET.cs" />
+    <Compile Include="ProtocolStruct\Gacha\eGACHA_TRANSFER_ITEM_RESULT.cs" />
+    <Compile Include="ProtocolStruct\Gacha\eGACHA_USER_WEAPON_PART.cs" />
+    <Compile Include="ProtocolStruct\Gacha\eGACHA_USE_COUPON.cs" />
+    <Compile Include="ProtocolStruct\Gacha\eGACHA_WEAPON_PART.cs" />
+    <Compile Include="ProtocolStruct\Gacha\eGACHA_WINTYPE.cs" />
+    <Compile Include="ProtocolStruct\Gacha\GACHA.cs" />
+    <Compile Include="ProtocolStruct\Gacha\GACHA_IDENTIFY_RESULT.cs" />
+    <Compile Include="ProtocolStruct\Gacha\ST_AI_GACHA_GROUP.cs" />
+    <Compile Include="ProtocolStruct\Gacha\ST_AI_GACHA_GROUP_LIST.cs" />
+    <Compile Include="ProtocolStruct\Gacha\ST_DISPLAY_DATA.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_GAME_USER_ITEM_INFO.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_USER_ATTACH_INFO.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_CHARITEM_INST.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_CHAROPTION.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_DRESSITEM_INST.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_FUNCITEM_INST.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_ITEM_INST.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_SEALITEM_INST.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_WAVECARD_INST.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_SACKITEM_INST.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_WEAPONITEM_INST.cs" />
+    <Compile Include="ProtocolStruct\Inven\PROTO_SACK_INST.cs" />
+    <Compile Include="ProtocolStruct\Package\PROTO_BUY_PACKAGE_ITEM_RESULT.cs" />
+    <Compile Include="ProtocolStruct\Package\PROTO_REFORM_PACKAGE_ITEM.cs" />
+    <Compile Include="ProtocolStruct\PROTO_DEFAULT_DRESS_DATA.cs" />
+    <Compile Include="ProtocolStruct\PROTO_DEFAULT_FUNC_DATA.cs" />
+    <Compile Include="ProtocolStruct\PROTO_ITEM_ID_DATA.cs" />
+    <Compile Include="ProtocolStruct\ROOMSETTINGCHANGEFLAG.cs" />
+    <Compile Include="ProtocolStruct\Room\ROOMLOCATION.cs" />
+    <Compile Include="ProtocolStruct\UCCCOLOR.cs" />
+    <Compile Include="ProtocolStruct\E_BUDDY_STATE.cs" />
+    <Compile Include="ProtocolStruct\E_GREEN_COMMUNITY_USER_STATE.cs" />
+    <Compile Include="ProtocolStruct\E_MATCH_TYPE.cs" />
+    <Compile Include="ProtocolStruct\E_MISSION_RESULT.cs" />
+    <Compile Include="ProtocolStruct\E_MISSION_TYPE.cs" />
+    <Compile Include="ProtocolStruct\E_REWARD_TYPE.cs" />
+    <Compile Include="ProtocolStruct\E_VVIP_ATTACHMENT_TYPE.cs" />
+    <Compile Include="ProtocolStruct\FORCEFINISH_RESULT.cs" />
+    <Compile Include="ProtocolStruct\FORCE_ROOMLEAVE_RESULT.cs" />
+    <Compile Include="ProtocolStruct\GAMEENDED_RESULT.cs" />
+    <Compile Include="ProtocolStruct\GAMEENDREASON.cs" />
+    <Compile Include="ProtocolStruct\GIVEITEM.cs" />
+    <Compile Include="ProtocolStruct\HACKTYPE.cs" />
+    <Compile Include="ProtocolStruct\HOSTEXIT_RESULT.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_SACKINFO.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_USER_ACHIEVE_DATA.cs" />
+    <Compile Include="ProtocolStruct\HOST_BANUSER_RESULT.cs" />
+    <Compile Include="ProtocolStruct\HOST_CASHITEM_DATA.cs" />
+    <Compile Include="ProtocolStruct\HOST_REPORT.cs" />
+    <Compile Include="ProtocolStruct\HOST_REPORT_RESULT.cs" />
+    <Compile Include="ProtocolStruct\HOST_RUNNING_GAME_INFO.cs" />
+    <Compile Include="ProtocolStruct\HOST_RUNNING_GAME_USER_INFO.cs" />
+    <Compile Include="ProtocolStruct\HOST_USER_STAT_RESULT.cs" />
+    <Compile Include="ProtocolStruct\INVITEE_LIST_RESULT.cs" />
+    <Compile Include="ProtocolStruct\INVITE_RESULT.cs" />
+    <Compile Include="ProtocolStruct\ITEM_TAB_LIST.cs" />
+    <Compile Include="ProtocolStruct\ITEM_TIME.cs" />
+    <Compile Include="ProtocolStruct\ITEM_TYPE.cs" />
+    <Compile Include="ProtocolStruct\JOINGAME_RESULT.cs" />
+    <Compile Include="ProtocolStruct\Login\CONNECTRESULT.cs" />
+    <Compile Include="ProtocolStruct\Login\CONNECT_HASH_DATA.cs" />
+    <Compile Include="ProtocolStruct\Login\DISCONNECTREASON.cs" />
+    <Compile Include="ProtocolStruct\Login\PROTO_CRYPTED_DATA.cs" />
+    <Compile Include="ProtocolStruct\Login\PROTO_GAMESERVER.cs" />
+    <Compile Include="ProtocolStruct\Login\PROTO_GAMESERVER_UPDATE.cs" />
+    <Compile Include="ProtocolStruct\Login\PROTO_LOGIN_INFO.cs" />
+    <Compile Include="ProtocolStruct\MMCONNECTRESULT.cs" />
+    <Compile Include="ProtocolStruct\MMCONNECT_UNKNOWNERROR_DETAIL_INFO.cs" />
+    <Compile Include="ProtocolStruct\MMSERVER_EXITTYPE.cs" />
+    <Compile Include="ProtocolStruct\MVPTYPE.cs" />
+    <Compile Include="ProtocolStruct\PCBGRADE.cs" />
+    <Compile Include="ProtocolStruct\PROTO_CHANNELLIST_CS.cs" />
+    <Compile Include="ProtocolStruct\PROTO_COUPON_DATA.cs" />
+    <Compile Include="ProtocolStruct\PROTO_HASHDATA.cs" />
+    <Compile Include="ProtocolStruct\PROTO_MAIN_BADGE_INFO.cs" />
+    <Compile Include="ProtocolStruct\PROTO_MM_ROOMINFO.cs" />
+    <Compile Include="ProtocolStruct\PROTO_RETURN_INFO.cs" />
+    <Compile Include="ProtocolStruct\PROTO_SLOTINFO.cs" />
+    <Compile Include="ProtocolStruct\QUICKJOIN_RESULT.cs" />
+    <Compile Include="ProtocolStruct\REPAIRALLITEM.cs" />
+    <Compile Include="ProtocolStruct\REPAIRITEM.cs" />
+    <Compile Include="ProtocolStruct\RESELLITEM.cs" />
+    <Compile Include="ProtocolStruct\RESELLITEM_COMPENSATION_REQ.cs" />
+    <Compile Include="ProtocolStruct\ROOMBOSTREMOVE.cs" />
+    <Compile Include="ProtocolStruct\ROOMBOTSADD.cs" />
+    <Compile Include="ProtocolStruct\ROOMCREATE_RESULT.cs" />
+    <Compile Include="ProtocolStruct\ROOMENTER_RESULT.cs" />
+    <Compile Include="ProtocolStruct\ROOMLISTRESULT.cs" />
+    <Compile Include="ProtocolStruct\ROOMOBSERVER.cs" />
+    <Compile Include="ProtocolStruct\ROOMSTATUS.cs" />
+    <Compile Include="ProtocolStruct\ROOMTEAMCHANGE.cs" />
+    <Compile Include="ProtocolStruct\SAVEUSERSETTING.cs" />
+    <Compile Include="ProtocolStruct\SHIFT_HOST.cs" />
+    <Compile Include="ProtocolStruct\SHIFT_HOST_RESULT.cs" />
+    <Compile Include="ProtocolStruct\SHOP_LIST.cs" />
+    <Compile Include="ProtocolStruct\sMissionCardRewardInfo_tag.cs" />
+    <Compile Include="ProtocolStruct\sMissionCardSrl.cs" />
+    <Compile Include="ProtocolStruct\sMissionCardTargetInfo_tag.cs" />
+    <Compile Include="ProtocolStruct\sMissionCardTargetValue.cs" />
+    <Compile Include="ProtocolStruct\sMissionCard_UserInfo.cs" />
+    <Compile Include="ProtocolStruct\STARTGAME_RESULT.cs" />
+    <Compile Include="ProtocolStruct\Host\MORE_INFO_FOR_AI.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_FINISHED_GAME.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_GAME_USER_INFO.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_START_HOST.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_TEAM_STAT.cs" />
+    <Compile Include="ProtocolStruct\Host\PROTO_USER_STAT.cs" />
+    <Compile Include="ProtocolStruct\START_HOST_RESULT.cs" />
+    <Compile Include="ProtocolStruct\SYSTEMTIME.cs" />
+    <Compile Include="ProtocolStruct\Team_Room_User.cs" />
+    <Compile Include="ProtocolStruct\TOURROOM_STATE.cs" />
+    <Compile Include="ProtocolStruct\TOURROOM_STATE_R.cs" />
+    <Compile Include="ProtocolStruct\USERMANNERS.cs" />
+    <Compile Include="ProtocolStruct\USERSTYLE.cs" />
+    <Compile Include="ProtocolStruct\VVIP_ITEM.cs" />
+    <Compile Include="ProtocolStruct\WEAPONCATEGORY.cs" />
+    <Compile Include="ProtocolStruct\WEAPONSLOT.cs" />
+    <Compile Include="ProtocolStruct\WEAPONTYPE.cs" />
+    <Compile Include="ProtocolStruct\WEAPON_CATEGORY.cs" />
+    <Compile Include="Server\BufferManager.cs" />
+    <Compile Include="Server\IUserTokenBase.cs" />
+    <Compile Include="Server\Server.cs" />
+    <Compile Include="Server\SocketEventPool.cs" />
+    <Compile Include="Server\UserTokenBase.cs" />
+    <Compile Include="SharedFolder\ROUNDTYPE.cs" />
+    <Compile Include="SharedFolder\ServerProperty.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

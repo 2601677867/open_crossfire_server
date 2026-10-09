@@ -1,0 +1,14 @@
+namespace Network.ProtocolStruct
+{
+    public enum FORCE_ROOMLEAVE_RESULT
+    {
+        FROOMLEAVE_SUCCESS,
+        FROOMLEAVE_WRONGUSER,
+        FROOMLEAVE_NOTBOSS,
+        FROOMLEAVE_WRONGTARGET,
+        FROOMLEAVE_BANNED,
+        FROOMLEAVE_UNKNOWNERROR,
+        FROOMLEAVE_TIMEOUT,
+        FROOMLEAVE_SPECIALUSER
+    }
+}

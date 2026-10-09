@@ -1,0 +1,31 @@
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\cf_loginsrv.exe.config
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\cf_loginsrv.exe
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\cf_loginsrv.pdb
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\Commons.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\DBGWManager.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\Network.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\PMSConn.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\Security.dll
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\Network.pdb
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\PMSConn.pdb
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\bin\CMMDebug_CN\Security.pdb
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\CMMDebug_CN\cf_loginsrv.csproj.CoreCompileInputs.cache
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\CMMDebug_CN\cf_loginsrv.csproj.CopyComplete
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\CMMDebug_CN\cf_loginsrv.exe
+C:\Users\PlayMaker\Desktop\ipgra v2 crossfire 3.0 source code\cf_loginsrv\obj\CMMDebug_CN\cf_loginsrv.pdb
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\cf_loginsrv.exe.config
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\cf_loginsrv.exe
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\cf_loginsrv.pdb
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\Commons.dll
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\DBGWManager.dll
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\Network.dll
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\PMSConn.dll
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\Security.dll
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\Network.pdb
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\PMSConn.pdb
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\bin\CMMDebug_CN\Security.pdb
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\CMMDebug_CN\cf_loginsrv.csproj.AssemblyReference.cache
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\CMMDebug_CN\cf_loginsrv.csproj.CoreCompileInputs.cache
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\CMMDebug_CN\cf_login.52C42B59.Up2Date
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\CMMDebug_CN\cf_loginsrv.exe
+D:\download\ipgra v2 crossfire 3.0 source code (2)\cf_loginsrv\obj\CMMDebug_CN\cf_loginsrv.pdb
