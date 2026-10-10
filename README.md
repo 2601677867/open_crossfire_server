@@ -104,10 +104,9 @@ msbuild gDBGW\gDBGW.sln      /t:Restore /p:Configuration=Release p:Platform="Any
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Ensure all modules are compatible with the 1.0 client in Debug mode.
+- [ ] Migrate gDBGW from SQL Server to MySQL.
+- [ ] Restore the server's original plugin system functionality.
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
@@ -133,14 +132,14 @@ Don't forget to give the project a star! Thanks again!
 
 ### Top contributors:
 
-<a href="https://github.com/github_username/repo_name/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=github_username/repo_name" alt="contrib.rocks image" />
+<a href="https://github.com/2601677867/open_crossfire_server/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=2601677867/open_crossfire_server" alt="contrib.rocks image" />
 </a>
 
 
 
 <!-- LICENSE -->
-## License
+## Legal Notice
 
 This repository is an **independent, educational re-implementation of a game-server wire protocol,
 created for interoperability research and study only**. It is **not** affiliated with, authorized,
@@ -158,6 +157,12 @@ self-hosted, isolated lab environments only. The software is provided **AS IS**,
 any kind; all risk lies with the user, and the authors accept no liability for any damages or legal
 consequences. Reverse-engineering legality varies by jurisdiction — verify your local laws first.
 Rights holders may contact [email/issue] and the material in question will be removed promptly.
+
+## LICENSE & Acknowledgments
+
+This open-source project is licensed under the GNU GPLv3, and we also extend our thanks to the talented individuals at the IPGra team (especially RedK).I was among the first to encounter IPGra and their reverse engineering work on CrossFire; I am well aware of the difficulty and complexity involved in this project. Without the framework built upon IPGra's code, this project would never have been possible
+
+kudos to you all.
 
 <!-- CONTACT -->
 ## Contact
